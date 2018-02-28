@@ -24,7 +24,7 @@ if (cluster.isMaster) {
 
   const app = express();
   mongoose.Promise = require('bluebird');
-  const TriviaSchema = require('../models/TriviaSchema.js');
+  const TriviaSchema = require('./models/TriviaSchema.js');
   const router = express.Router();
 
   // Priority serve any static files.
