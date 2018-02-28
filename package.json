@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:ed42311/heroku-cra-node.git"
+    "url": "git+https://github.com/Montana-Code-School/triviaNight.git"
   },
   "license": "MIT",
   "devDependencies": {}

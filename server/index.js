@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const mongoose  = require('mongoose');
+const mongoose = require('mongoose');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
@@ -21,9 +21,10 @@ if (cluster.isMaster) {
   });
 
 } else {
+
   const app = express();
   mongoose.Promise = require('bluebird');
-  const Bear = require('../models/Bear');
+  const triviaSchema = require('../models/triviaSchema.js');
   const router = express.Router();
 
   // Priority serve any static files.
@@ -38,7 +39,7 @@ if (cluster.isMaster) {
   // check to see I if I need this...
 
   // connect to database
-  mongoose.connection.openUri('mongodb://localhost/bears');
+  mongoose.connection.openUri('mongodb://localhost/trivia');
 
   // Answer API requests.
   app.get('/api', function (req, res) {
@@ -46,68 +47,68 @@ if (cluster.isMaster) {
     res.send('{"message":"Hello from the custom server!"}');
   });
 
-  router.use(function(res, req, next) {
-    console.log("something is happening");
+  router.use((res, req, next) => {
+    console.log("something is afoot")
     next();
-  })
+  });
 
-  router.get('/', function(req, res) {
-    res.json({ message: "Hello, welcome to our api!"})
-  })
+  router.get('/', (req, res) => {
+    res.json({message:"What's up? Welcome to QuizPig!~"});
+  });
 
-  router.route('/bears')
+  router.route('/trivia')
 
-    .post(function(req, res){
-      var bear = new Bear();
-      bear.name = req.body.name;
-
-      bear.save(function(err) {
-          if(err)
-            res.send(err);
-          res.json({ message: "Bear is made, now is new Bear." })
-        })
-      })
-
-
-    .get(function(req, res){
-      Bear.find(function(err, bears){
-        if(err)
-          res.send(err)
-        res.json(bears)
-      })
-    })
-
-  router.route('/bears/:bear_id')
-
-    .get(function(req, res){
-      Bear.findById(req.params.bear_id, function(err, bear){
-        if(err)
+    .post((req, res) => {
+      const trivia = new trivia();
+      trivia.question = req.body.question;
+  // add other schema fields here
+      trivia.save(err => {
+        console.log("saved");
+        if (err)
           res.send(err);
-        res.json(bear)
+        res.json({ message: "Question created!!"});
       });
     })
 
-    .put(function(req,res){
-      Bear.findById(req.params.bear_id, function(err, bear){
-        if(err)
-          res.send(err);
-        bear.name = req.body.name;
+      .get((req, res) => {
+          trivia.find((err, trivia) => {
+            if(err)
+              res.send(err);
+            res.json(trivia);
+          });
+        });
 
-        bear.save(function(err) {
+    router.route('/trivia/:trivia_id')
+
+      .get((req, res) => {
+        trivia.findById(req.params.trivia_id, (err, trivia) => {
+          if (err)
+            res.send(err);
+          res.json(trivia);
+        });
+      })
+
+    .put((req, res) => {
+      trivia.findById(req.params.trivia_id, (err, trivia) => {
+        if (err)
+          res.send(err);
+        trivia.question = req.body.question;
+    // enter remaining schema fields here ! :)
+        trivia.save(err => {
           if(err)
             res.send(err);
-          res.json({ message: "Bear was saved very good" })
-        })
-      })
+          res.json({message: "trivia updated!"});
+        });
+      });
     })
 
-    .delete(function(req, res){
-      Bear.remove({
-        _id: req.params.bear_id
-      }, function(err, bear) {
-        if(err)
+    .delete(({params}, res) => {
+      trivia.remove({
+        _id: params.trivia_id
+      }, (err, trivia) => {
+        if (err)
           res.send(err);
-          res.json({ message: "Now is dead bear."});
+        res.json({message: "trivia id removed!"});
       });
     });
 
