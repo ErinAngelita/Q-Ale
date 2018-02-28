@@ -24,7 +24,7 @@ if (cluster.isMaster) {
 
   const app = express();
   mongoose.Promise = require('bluebird');
-  const triviaSchema = require('../models/triviaSchema.js');
+  const TriviaSchema = require('../models/TriviaSchema.js');
   const router = express.Router();
 
   // Priority serve any static files.
@@ -59,7 +59,7 @@ if (cluster.isMaster) {
   router.route('/trivia')
 
     .post((req, res) => {
-      const trivia = new trivia();
+      const trivia = new TriviaSchema();
       trivia.question = req.body.question;
   // add other schema fields here
       trivia.save(err => {
@@ -71,7 +71,7 @@ if (cluster.isMaster) {
     })
 
       .get((req, res) => {
-          trivia.find((err, trivia) => {
+          TriviaSchema.find((err, trivia) => {
             if(err)
               res.send(err);
             res.json(trivia);
@@ -81,7 +81,7 @@ if (cluster.isMaster) {
     router.route('/trivia/:trivia_id')
 
       .get((req, res) => {
-        trivia.findById(req.params.trivia_id, (err, trivia) => {
+        TriviaSchema.findById(req.params.trivia_id, (err, trivia) => {
           if (err)
             res.send(err);
           res.json(trivia);
@@ -89,7 +89,7 @@ if (cluster.isMaster) {
       })
 
     .put((req, res) => {
-      trivia.findById(req.params.trivia_id, (err, trivia) => {
+      TriviaSchema.findById(req.params.trivia_id, (err, trivia) => {
         if (err)
           res.send(err);
         trivia.question = req.body.question;
@@ -103,7 +103,7 @@ if (cluster.isMaster) {
     })
 
     .delete(({params}, res) => {
-      trivia.remove({
+      TriviaSchema.remove({
         _id: params.trivia_id
       }, (err, trivia) => {
         if (err)
