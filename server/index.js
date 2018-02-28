@@ -6,6 +6,7 @@ const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
 const PORT = process.env.PORT || 5000;
+const db = process.env.MONGODB_URI || 'mongodb://localhost/trivia';
 
 // Multi-process to utilize all CPU cores.
 if (cluster.isMaster) {
@@ -39,7 +40,7 @@ if (cluster.isMaster) {
   // check to see I if I need this...
 
   // connect to database
-  mongoose.connection.openUri('mongodb://localhost/trivia');
+  mongoose.connection.openUri(db);
 
   // Answer API requests.
   app.get('/api', function (req, res) {
