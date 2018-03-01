@@ -1,6 +1,7 @@
 import React from 'react';
 import OktaSignIn from '@okta/okta-signin-widget';
 import Backbone from 'backbone';
+import '../../css/LoginPage.css';
 
 export default class LoginPage extends React.Component {
   constructor(){

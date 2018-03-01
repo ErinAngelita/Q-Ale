@@ -1,13 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Tomorrowland from '../css/Images/Tomorrowland.jpg';
+import '../css/Header.css';
 
 const Header = () => (
   <header>
+    <div>
+      <img id="main" src={Tomorrowland}/>
+    </div>
     <nav>
-      <ul>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/bears'>Bears</Link></li>
-      </ul>
+    
     </nav>
   </header>
 )
