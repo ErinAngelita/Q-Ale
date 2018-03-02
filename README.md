@@ -7,7 +7,11 @@
 - linked mLabs account to Heroku
 - scrapped everything up until this point.... # ILoveLearning
 
-
+#### 3/1/18
+- added Okta Authentication
+- Created file structure for components
+- having issues with redirects from login and login on heroku
+- bear bones css
 
 
 

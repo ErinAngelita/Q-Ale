@@ -62,7 +62,7 @@ if (cluster.isMaster) {
     .post((req, res) => {
       const trivia = new TriviaSchema();
       trivia.question = req.body.question;
-  // add other schema fields here
+      // add other schema fields here
       trivia.save(err => {
         console.log("saved");
         if (err)
@@ -71,30 +71,30 @@ if (cluster.isMaster) {
       });
     })
 
-      .get((req, res) => {
-          TriviaSchema.find((err, trivia) => {
-            if(err)
-              res.send(err);
-            res.json(trivia);
-          });
-        });
+    .get((req, res) => {
+      TriviaSchema.find((err, trivia) => {
+        if(err)
+          res.send(err);
+        res.json(trivia);
+      });
+    });
 
-    router.route('/trivia/:trivia_id')
+  router.route('/trivia/:trivia_id')
 
-      .get((req, res) => {
-        TriviaSchema.findById(req.params.trivia_id, (err, trivia) => {
-          if (err)
-            res.send(err);
-          res.json(trivia);
-        });
-      })
+    .get((req, res) => {
+      TriviaSchema.findById(req.params.trivia_id, (err, trivia) => {
+        if (err)
+          res.send(err);
+        res.json(trivia);
+      });
+    })
 
     .put((req, res) => {
       TriviaSchema.findById(req.params.trivia_id, (err, trivia) => {
         if (err)
           res.send(err);
         trivia.question = req.body.question;
-    // enter remaining schema fields here ! :)
+        // enter remaining schema fields here ! :)
         trivia.save(err => {
           if(err)
             res.send(err);

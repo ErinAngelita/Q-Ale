@@ -1,8 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+import RoundSchema from './RoundSchema.js';
 const TriviaSchema = new Schema({
-  question: String,
-  //This is where we type all the different stuff i.e.questions and categories and things
+  name: String,
+  date: String,
+  rounds: [RoundSchema]
 });
 
-module.exports = mongoose.model('trivia', TriviaSchema);
+let trivia = mongoose.model('trivia', TriviaSchema);
+module.exports = {
+  trivia: trivia,
+  triviaSchema: TriviaSchema
+};
