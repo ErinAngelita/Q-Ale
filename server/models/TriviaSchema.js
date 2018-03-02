@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-import RoundSchema from './RoundSchema.js';
+const RoundSchema = require('./RoundSchema.js');
 const TriviaSchema = new Schema({
   name: String,
   date: String,
-  rounds: [RoundSchema]
+  rounds: [{ type: Schema.Types.ObjectId, ref: 'round' }]
 });
 
 let trivia = mongoose.model('trivia', TriviaSchema);
