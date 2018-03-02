@@ -10,5 +10,5 @@ const TriviaSchema = new Schema({
 let trivia = mongoose.model('trivia', TriviaSchema);
 module.exports = {
   trivia: trivia,
-  triviaSchema: TriviaSchema
+  TriviaSchema: TriviaSchema
 };

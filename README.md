@@ -13,6 +13,11 @@
 - having issues with redirects from login and login on heroku
 - bear bones css
 
+### 3/2/18
+- created our schemas
+- wrote routes for our schemas
+- tested our route functionality with postman (not working :( specifically POST function for TriviaSchema)
+
 
 
 

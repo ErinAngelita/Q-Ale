@@ -65,7 +65,7 @@ const db = process.env.MONGODB_URI || 'mongodb://localhost/trivia';
   router.route('/trivia')
 
     .post((req, res) => {
-      const trivia = new TriviaSchema();
+      const trivia = new TriviaSchema.trivia();
       trivia.name = req.body.name;
       trivia.date = req.body.date;
       trivia.rounds = req.body.rounds;
