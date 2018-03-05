@@ -9,7 +9,7 @@ const Header = () => (
       <img id="main" src={Tomorrowland}/>
     </div>
     <nav>
-    
+
     </nav>
   </header>
 )
