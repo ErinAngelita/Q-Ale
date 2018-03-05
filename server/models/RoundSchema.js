@@ -10,5 +10,5 @@ const RoundSchema = new Schema({
 let round = mongoose.model('round', RoundSchema);
 module.exports = {
   round: round,
-  roundSchema: RoundSchema
+  RoundSchema: RoundSchema
 };
