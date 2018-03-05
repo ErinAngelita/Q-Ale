@@ -10,5 +10,5 @@ const QuestionSchema = new Schema({
 let question = mongoose.model('question', QuestionSchema);
 module.exports = {
   question: question,
-  questionSchema: QuestionSchema
+  QuestionSchema: QuestionSchema
 };
