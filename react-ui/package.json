@@ -8,11 +8,13 @@
   "dependencies": {
     "@okta/okta-react": "0.0.12",
     "@okta/okta-signin-widget": "^2.6.0",
+    "babel-preset-env": "^1.6.1",
     "backbone": "^1.3.3",
     "cors": "^2.8.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "semantic-ui-react": "^0.78.3"
   },
   "scripts": {
     "start": "react-scripts start",

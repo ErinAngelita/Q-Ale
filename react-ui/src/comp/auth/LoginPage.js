@@ -1,66 +1,41 @@
-import React from 'react';
+import React, {Component} from 'react';
 import OktaSignIn from '@okta/okta-signin-widget';
 import Backbone from 'backbone';
 import '../../css/LoginPage.css';
 
+import config from './.samples.config.js';
+
 export default class LoginPage extends React.Component {
-  constructor(){
-    super();
-    this.state = {user:null};
-    this.widget = new OktaSignIn({
-      baseUrl: 'https://dev-398658.oktapreview.com',
-      clientId: '0oae6giclrPt2JoAt0h7',
-      redirectUri: 'http://localhost:3000',
+  constructor(props){
+    super(props);
+    this.signIn = new OktaSignIn({
+      baseUrl: config.oidc.issuer.split('/oauth2')[0],
+      clientId: config.oidc.clientId,
+      redirectUri: config.oidc.redirectUri,
       authParams: {
-        responseType: 'id_token'
+        responseType: ['id_token', 'token'],
+        issuer: config.oidc.issuer,
+        display: 'page',
+        scopes: config.oidc.scope.split(' '),
       }
     });
-
-    this.showLogin = this.showLogin.bind(this);
-    this.logout = this.logout.bind(this);
   }
-
   componentDidMount() {
-    this.widget.session.get((response) => {
-      if(response.status !== 'INACTIVE') {
-        this.setState({user:response.login});
-      } else {
-        this.showLogin();
-      }
-    });
-  }
+    this.signIn.renderEl(
+      {el: '#sign-in-widget'},
+      () => {
 
-  showLogin() {
-    Backbone.history.stop();
-    this.widget.renderEl({el:this.loginContainer},
-      (response) => {
-        this.setState({user: response.claims.email});
       },
       (err) => {
-        console.log(err);
+        throw err;
       }
     );
-  }
-
-  logout() {
-    this.widget.signOut(() => {
-      this.setState({user: null});
-      this.showLogin();
-    });
   }
 
   render() {
     return(
       <div>
-        {this.state.user ? (
-          <div className= "container">
-            <div>Welcome, {this.state.user}!</div>
-            <button onClick= {this.logout}>Logout</button>
-          </div>
-        ) : null}
-        {this.state.user ? null : (
-          <div ref={(div) => {this.loginContainer = div; }} />
-        )}
+        <div id="sign-in-widget" />
       </div>
     );
   }

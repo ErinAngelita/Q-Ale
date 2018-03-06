@@ -17,6 +17,7 @@
   "dependencies": {
     "@okta/okta-react": "0.0.12",
     "@okta/okta-signin-widget": "^2.6.0",
+    "ajv-keywords": "^3.1.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
