@@ -18,6 +18,31 @@
 - wrote routes for our schemas
 - tested our route functionality with postman (not working :( specifically POST function for TriviaSchema)
 
+### 3/5/18
+- built test route for question schema
+- nested create question in round POST route in API server
+
+### 3/6/18
+- reworked okta authentication with samples-js-react (successful!)
+- tested redirect Uri with Heroku
+- pushed to heroku successfully
+- removed cluster fork code
+
+````````// Multi-process to utilize all CPU cores.
+// if (cluster.isMaster) {
+//   console.error(`Node cluster master ${process.pid} is running`);
+//
+//    Fork workers.
+//   for (let i = 0; i < numCPUs; i++) {
+//     cluster.fork();
+//   }
+//
+//   cluster.on('exit', (worker, code, signal) => {
+//     console.error(`Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`);
+//   });
+//
+// } else {````````
+
 
 
 

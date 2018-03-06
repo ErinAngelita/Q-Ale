@@ -12,6 +12,6 @@ const Header = () => (
 
     </nav>
   </header>
-)
+);
 
 export default Header;

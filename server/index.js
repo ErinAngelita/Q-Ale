@@ -8,21 +8,7 @@ const numCPUs = require('os').cpus().length;
 const PORT = process.env.PORT || 5000;
 const db = process.env.MONGODB_URI || 'mongodb://localhost/trivia';
 
-// Multi-process to utilize all CPU cores.
 
-// if (cluster.isMaster) {
-//   console.error(`Node cluster master ${process.pid} is running`);
-//
-//    Fork workers.
-//   for (let i = 0; i < numCPUs; i++) {
-//     cluster.fork();
-//   }
-//
-//   cluster.on('exit', (worker, code, signal) => {
-//     console.error(`Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`);
-//   });
-//
-// } else {
 
 const app = express();
 mongoose.Promise = require('bluebird');
@@ -63,26 +49,26 @@ router.get('/', (req, res) => {
 //Routes for TriviaSchema
 
 router.route('/trivia')
-.post((req, res) => {
-  const trivia = new TriviaSchema.trivia();
-  trivia.name = req.body.name;
-  trivia.date = req.body.date;
-  trivia.rounds = req.body.rounds;
-  console.log(req.body.name);
-  trivia.save(err => {
-    console.log("saved");
-    if (err)
-      res.send(err);
-    res.json({message: "Quiz created!!"});
+  .post((req, res) => {
+    const trivia = new TriviaSchema.trivia();
+    trivia.name = req.body.name;
+    trivia.date = req.body.date;
+    trivia.rounds = req.body.rounds;
+    console.log(req.body.name);
+    trivia.save(err => {
+      console.log("saved");
+      if (err)
+        res.send(err);
+      res.json({message: "Quiz created!!"});
+    });
+  })
+  .get((req, res) => {
+    TriviaSchema.trivia.find((err, trivia) => {
+      if (err)
+        res.send(err);
+      res.json(trivia);
+    });
   });
-})
-.get((req, res) => {
-  TriviaSchema.trivia.find((err, trivia) => {
-    if (err)
-      res.send(err);
-    res.json(trivia);
-  });
-});
 
 router.route('/trivia/:trivia_id')
   .get((req, res) => {
@@ -91,8 +77,8 @@ router.route('/trivia/:trivia_id')
         res.send(err);
       res.json(trivia);
     });
-})
-.put((req, res) => {
+  })
+  .put((req, res) => {
     TriviaSchema.trivia.findById(req.params.trivia_id, (err, trivia) => {
       if (err)
         res.send(err);
@@ -106,56 +92,56 @@ router.route('/trivia/:trivia_id')
       });
     });
   })
-.delete(({
-  params
-}, res) => {
-  TriviaSchema.trivia.remove({
-    _id: params.trivia_id
-  }, (err, trivia) => {
-    if (err)
-      res.send(err);
-    res.json({message: "Quiz removed!"});
+  .delete(({
+    params
+  }, res) => {
+    TriviaSchema.trivia.remove({
+      _id: params.trivia_id
+    }, (err, trivia) => {
+      if (err)
+        res.send(err);
+      res.json({message: "Quiz removed!"});
+    });
   });
-});
 //end of TriviaSchema routes
 
 //Begining of RoundSchema started working on first .post
 
 router.route('/round')
 
-.post((req, res) => {
-  const round = new RoundSchema.round();
-  round.category = req.body.category;
-  round.roundNumber = req.body.roundNumber;
-  const question = new QuestionSchema.question({
-    question: "hey",
-    answer: "you",
-    is_Img: false,
-    img_Url: "there"
+  .post((req, res) => {
+    const round = new RoundSchema.round();
+    round.category = req.body.category;
+    round.roundNumber = req.body.roundNumber;
+    const question = new QuestionSchema.question({
+      question: "hey",
+      answer: "you",
+      is_Img: false,
+      img_Url: "there"
+    });
+    round.questions.push(question);
+    round.save(err => {
+      console.log("saved");
+      if (err)
+        res.send(err);
+      res.json({message: "Round created with a question!!"});
+    });
   })
-  round.questions.push(question);
-  round.save(err => {
-    console.log("saved");
-    if (err)
-      res.send(err);
-    res.json({message: "Round created with a question!!"});
-  });
-})
 
-.get((req, res) => {
-  RoundSchema.round.find((err, round) => {
-    if (err)
-      res.send(err);
-    res.json(round);
+  .get((req, res) => {
+    RoundSchema.round.find((err, round) => {
+      if (err)
+        res.send(err);
+      res.json(round);
+    });
   });
-});
 
 router.route('/round/:round_id')
 
-.post((req, res) => {
-  RoundSchema.round.findById(req.params.round_id, (err, round) => {
-    if(err)
-      res.send(err);
+  .post((req, res) => {
+    RoundSchema.round.findById(req.params.round_id, (err, round) => {
+      if(err)
+        res.send(err);
       const question = new QuestionSchema.question({
         question: "hey",
         answer: "you",
@@ -166,45 +152,45 @@ router.route('/round/:round_id')
       round.questions.push(question);
       round.save(err => {
         if(err)
-        res.send(err);
+          res.send(err);
         res.json({message: "round questions updated!"});
       });
-  });
+    });
 
-})
+  })
 
-.get((req, res) => {
-  RoundSchema.round.findById(req.params.round_id).populate('questions').exec((err, round) => {
-    if (err)
-      res.send(err);
-    res.json(round);
-  });
-})
-
-.put((req, res) => {
-  RoundSchema.round.findById(req.params.round_id, (err, round) => {
-    if (err)
-      res.send(err);
-    round.category = req.body.category;
-    round.roundNumber = req.body.roundNumber;
-    round.questions = req.body.questions;
-    round.save(err => {
+  .get((req, res) => {
+    RoundSchema.round.findById(req.params.round_id).populate('questions').exec((err, round) => {
       if (err)
         res.send(err);
-      res.json({message: "Round updated!"});
+      res.json(round);
+    });
+  })
+
+  .put((req, res) => {
+    RoundSchema.round.findById(req.params.round_id, (err, round) => {
+      if (err)
+        res.send(err);
+      round.category = req.body.category;
+      round.roundNumber = req.body.roundNumber;
+      round.questions = req.body.questions;
+      round.save(err => {
+        if (err)
+          res.send(err);
+        res.json({message: "Round updated!"});
+      });
+    });
+  })
+
+  .delete(({params}, res) => {
+    RoundSchema.round.remove({
+      _id: params.round_id
+    }, (err, round) => {
+      if (err)
+        res.send(err);
+      res.json({message: "Round removed!"});
     });
   });
-})
-
-.delete(({params}, res) => {
-  RoundSchema.round.remove({
-    _id: params.round_id
-  }, (err, round) => {
-    if (err)
-      res.send(err);
-    res.json({message: "Round removed!"});
-  });
-});
 
 //End of Round Schema
 
@@ -212,60 +198,60 @@ router.route('/round/:round_id')
 
 router.route('/question')
 
-.post((req, res) => {
-  console.log(req.body);
-  const question = new QuestionSchema.question();
-  question.question = req.body.question;
-  question.answer = req.body.answer;
-  question.is_Img = req.body.is_Img;
-  question.img_Url = req.body.img_Url;
-  question.save(err => {
-    console.log("saved");
-    if (err)
-      res.send(err);
-    res.json({message: "Question created!!"});
-  });
-})
-.get((req, res) => {
-  QuestionSchema.question.find((err, question) => {
-    if (err)
-      res.send(err);
-    res.json(question);
-  });
-});
-
-router.route('/question/:question_id')
-.get((req, res) => {
-  QuestionSchema.question.findById(req.params.question_id, (err, question) => {
-    if (err)
-      res.send(err);
-    res.json(question);
-  });
-})
-.put((req, res) => {
-  QuestionSchema.question.findById(req.params.question_id, (err, question) => {
-    if (err)
-      res.send(err);
+  .post((req, res) => {
+    console.log(req.body);
+    const question = new QuestionSchema.question();
     question.question = req.body.question;
     question.answer = req.body.answer;
     question.is_Img = req.body.is_Img;
     question.img_Url = req.body.img_Url;
     question.save(err => {
+      console.log("saved");
       if (err)
         res.send(err);
-      res.json({message: "Question updated!"});
+      res.json({message: "Question created!!"});
+    });
+  })
+  .get((req, res) => {
+    QuestionSchema.question.find((err, question) => {
+      if (err)
+        res.send(err);
+      res.json(question);
     });
   });
-})
-.delete(({params}, res) => {
-  QuestionSchema.question.remove({
-    _id: params.question_id
-  }, (err, question) => {
-    if (err)
-      res.send(err);
-    res.json({message: "Question removed!"});
+
+router.route('/question/:question_id')
+  .get((req, res) => {
+    QuestionSchema.question.findById(req.params.question_id, (err, question) => {
+      if (err)
+        res.send(err);
+      res.json(question);
+    });
+  })
+  .put((req, res) => {
+    QuestionSchema.question.findById(req.params.question_id, (err, question) => {
+      if (err)
+        res.send(err);
+      question.question = req.body.question;
+      question.answer = req.body.answer;
+      question.is_Img = req.body.is_Img;
+      question.img_Url = req.body.img_Url;
+      question.save(err => {
+        if (err)
+          res.send(err);
+        res.json({message: "Question updated!"});
+      });
+    });
+  })
+  .delete(({params}, res) => {
+    QuestionSchema.question.remove({
+      _id: params.question_id
+    }, (err, question) => {
+      if (err)
+        res.send(err);
+      res.json({message: "Question removed!"});
+    });
   });
-});
 
 //End of QuestionSchema
 
@@ -279,4 +265,3 @@ app.get('*', function(request, response) {
 app.listen(PORT, function() {
   console.error(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
 });
-//}

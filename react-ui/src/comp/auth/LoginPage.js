@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import OktaSignIn from '@okta/okta-signin-widget';
 import Backbone from 'backbone';
 import '../../css/LoginPage.css';
-
 import config from './.samples.config.js';
 
 export default class LoginPage extends React.Component {
@@ -20,11 +19,11 @@ export default class LoginPage extends React.Component {
       }
     });
   }
+
   componentDidMount() {
     this.signIn.renderEl(
       {el: '#sign-in-widget'},
       () => {
-
       },
       (err) => {
         throw err;
