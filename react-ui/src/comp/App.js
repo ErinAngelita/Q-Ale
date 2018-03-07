@@ -33,6 +33,7 @@ class App extends Component {
               <Route path="/login" component={LoginPage} />
               <SecureRoute path="/createquiz" component={CreateQuiz} />
               <SecureRoute path="/profile" component={Profile} />
+              <SecureRoute path="/testRoute" component={TestRoute} />
             </Container>
           </Security>
         </Router>

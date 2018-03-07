@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
+import { withAuth } from '@okta/okta-react';
 
-export default class ReturnField extends Component {
+import { checkAuthentication } from './helpers';
+
+export default withAuth(class ReturnField extends Component {
   constructor(props){
     super(props);
-    this.state = {text: ""};
+    this.state = {text: "", userinfo: null, authenticated: null};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.checkAuthentication = checkAuthentication.bind(this);
   }
+
+  async componentDidMount() {
+      this.checkAuthentication();
+  }
+
+  async componentDidUpdate() {
+      this.checkAuthentication();
+  }
+
   handleChange(event) {
     console.log(event.target.value);
     this.setState({text: event.target.value});
@@ -22,7 +35,8 @@ export default class ReturnField extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        question: 'a question',
+        question: this.state.userinfo.sub,
+
       })
     });
   }
@@ -36,4 +50,4 @@ export default class ReturnField extends Component {
       </form>
     );
   }
-}
+})

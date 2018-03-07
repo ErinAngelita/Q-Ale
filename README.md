@@ -28,6 +28,11 @@
 - pushed to heroku successfully
 - removed cluster fork code
 
+### 3/7/18
+- built userschema.js (need to reassess userschema)
+- with testroute.js, used withAuth (helpers.js, async) to access userinfo.sub
+
+
 ````````// Multi-process to utilize all CPU cores.
 // if (cluster.isMaster) {
 //   console.error(`Node cluster master ${process.pid} is running`);
