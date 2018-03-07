@@ -12,6 +12,7 @@ const db = process.env.MONGODB_URI || 'mongodb://localhost/trivia';
 
 const app = express();
 mongoose.Promise = require('bluebird');
+const UserSchema = require('./models/UserSchema.js');
 const TriviaSchema = require('./models/TriviaSchema.js');
 const RoundSchema = require('./models/RoundSchema.js');
 const QuestionSchema = require('./models/QuestionSchema.js');
@@ -46,6 +47,112 @@ router.get('/', (req, res) => {
   res.json({message: "What's up? Welcome to QuizPig!~"});
 });
 
+// Routes for UserSchema
+
+router.route('/userId')
+
+  // .post((req, res) => {
+  //   const userId = new UserSchema.userId();
+  //   userId.tokenSub = req.body.tokenSub;
+  //   userId.trivias = req.body.trivias;
+  //   userId.save(err => {
+  //     console.log("saved");
+  //     if (err)
+  //       res.send(err);
+  //     res.json({message: "User created!!"});
+  //   });
+  // })
+
+  .get((req, res) => {
+    UserSchema.userId.find((err, userId) => {
+      if (err)
+        res.send(err);
+      res.json(userId);
+    });
+  })
+
+  .post((req, res) => {
+    const userId = new UserSchema.userId();
+    userId.tokenSub = req.body.tokenSub;
+    const trivia = new TriviaSchema.trivia({
+      name: req.body.name,
+      date: req.body.date
+    });
+    const round = new RoundSchema.round({
+      category: req.body.category,
+      roundNumber: req.body.roundNumber
+    });
+    const question = new QuestionSchema.question({
+      question: req.body.question,
+      answer: req.body.answer,
+      is_Img: req.body.is_Img,
+      img_Url: req.body.img_Url
+    })
+    trivia.save();
+    round.save();
+    question.save();
+    userId.trivias.push(trivia);
+    trivia.rounds.push(round);
+    round.questions.push(question);
+    userId.save(err => {
+      console.log("saved");
+      if (err)
+        res.send(err);
+      res.json({message: "User created with a quiz!!"});
+    });
+  })
+
+
+  router.route('/userId/:userId_id')
+    .get((req, res) => {
+      UserSchema.userId.findById(req.params.userId_id).populate('trivias').populate('trivia.rounds').populate('trivia.round.questions').exec((err, userId) => {
+        if (err)
+          res.send(err);
+        res.json(userId);
+      });
+    })
+
+    .post((req, res) => {
+      UserSchema.userId.findById(req.params.userId_id, (err, userId) => {
+        if(err)
+          res.send(err);
+        const trivia = new TriviaSchema.trivia({
+          name: "do you work yet?"
+        });
+        trivia.save();
+        userId.trivias.push(trivia);
+        userId.save(err => {
+          if(err)
+            res.send(err);
+          res.json({message: "userId trivias updated!"});
+      });
+    })
+  })
+
+    .put((req, res) => {
+      UserSchema.userId.findById(req.params.userId_id, (err, userId) => {
+        if (err)
+          res.send(err);
+        userId.tokenSub = req.body.tokenSub;
+        userId.trivias = req.body.trivias;
+        userId.save(err => {
+          if (err)
+            res.send(err);
+          res.json({message: "User updated!"});
+        });
+      });
+    })
+    .delete(({
+      params
+    }, res) => {
+      UserSchema.userId.remove({
+        _id: params.userId_id
+      }, (err, userId) => {
+        if (err)
+          res.send(err);
+        res.json({message: "User removed!"});
+    });
+})
 //Routes for TriviaSchema
 
 router.route('/trivia')

@@ -31,6 +31,8 @@
 ### 3/7/18
 - built userschema.js (need to reassess userschema)
 - with testroute.js, used withAuth (helpers.js, async) to access userinfo.sub
+- nested user POST route to include trivias, rounds, and questions
+- started testing nested populate functions (deep population for days)
 
 
 ````````// Multi-process to utilize all CPU cores.

@@ -6,4 +6,8 @@ const UserSchema = new Schema({
   trivias: [{ type: Schema.Types.ObjectId, ref: 'trivia' }]
 });
 
-module.exports = mongoose.model('user', UserSchema);
+let userId = mongoose.model('userId', UserSchema);
+module.exports = {
+  userId: userId,
+  UserSchema: UserSchema
+};

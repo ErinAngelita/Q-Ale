@@ -27,7 +27,7 @@ export default withAuth(class ReturnField extends Component {
   handleSubmit(event) {
     console.log(this.state.text);
     event.preventDefault();
-    fetch('/api/question', {
+    fetch('/api/userId', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -35,7 +35,7 @@ export default withAuth(class ReturnField extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        question: this.state.userinfo.sub,
+        tokenSub: this.state.userinfo.sub
 
       })
     });
