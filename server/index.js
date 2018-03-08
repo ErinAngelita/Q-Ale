@@ -49,19 +49,32 @@ router.get('/', (req, res) => {
 
 // Routes for UserSchema
 
-router.route('/userId')
+router.route('/bananas')
 
-  // .post((req, res) => {
-  //   const userId = new UserSchema.userId();
-  //   userId.tokenSub = req.body.tokenSub;
-  //   userId.trivias = req.body.trivias;
-  //   userId.save(err => {
-  //     console.log("saved");
-  //     if (err)
-  //       res.send(err);
-  //     res.json({message: "User created!!"});
-  //   });
-  // })
+  .post((req, res) => {
+    const userId = new UserSchema.userId();
+    userId.tokenSub = req.body.tokenSub;
+    const trivia = new TriviaSchema.trivia({
+      name: req.body.name,
+      date: req.body.date
+    });
+    trivia.save();
+    userId.trivias.push(trivia);
+    userId.save(err => {
+      console.log("saved");
+      if (err)
+        res.send(err);
+      res.json({message: "User created with a BANANA!!"});
+    });
+  })
+  .get((req, res) => {
+    UserSchema.userId.find((err, userId) => {
+      if (err)
+        res.send(err);
+      res.json(userId);
+    });
+  });
+router.route('/userId')
 
   .get((req, res) => {
     UserSchema.userId.find((err, userId) => {
@@ -87,7 +100,7 @@ router.route('/userId')
       answer: req.body.answer,
       is_Img: req.body.is_Img,
       img_Url: req.body.img_Url
-    })
+    });
     trivia.save();
     round.save();
     question.save();
@@ -100,59 +113,67 @@ router.route('/userId')
         res.send(err);
       res.json({message: "User created with a quiz!!"});
     });
+  });
+
+
+router.route('/userId/:userId_id')
+  .get((req, res) => {
+    UserSchema.userId.findById(req.params.userId_id).populate({
+      path: 'trivias',
+      populate: {
+        path: 'rounds',
+        populate: {
+          path: 'questions'
+        }
+      }
+    }).exec((err, userId) => {
+      if (err)
+        res.send(err);
+      res.json(userId);
+    });
   })
 
-
-  router.route('/userId/:userId_id')
-    .get((req, res) => {
-      UserSchema.userId.findById(req.params.userId_id).populate('trivias').populate('trivia.rounds').populate('trivia.round.questions').exec((err, userId) => {
-        if (err)
-          res.send(err);
-        res.json(userId);
+  .post((req, res) => {
+    UserSchema.userId.findById(req.params.userId_id, (err, userId) => {
+      if(err)
+        res.send(err);
+      const trivia = new TriviaSchema.trivia({
+        name: "do you work yet?"
       });
-    })
-
-    .post((req, res) => {
-      UserSchema.userId.findById(req.params.userId_id, (err, userId) => {
+      trivia.save();
+      userId.trivias.push(trivia);
+      userId.save(err => {
         if(err)
           res.send(err);
-        const trivia = new TriviaSchema.trivia({
-          name: "do you work yet?"
-        });
-        trivia.save();
-        userId.trivias.push(trivia);
-        userId.save(err => {
-          if(err)
-            res.send(err);
-          res.json({message: "userId trivias updated!"});
+        res.json({message: "userId trivias updated!"});
       });
-    })
+    });
   })
 
-    .put((req, res) => {
-      UserSchema.userId.findById(req.params.userId_id, (err, userId) => {
+  .put((req, res) => {
+    UserSchema.userId.findById(req.params.userId_id, (err, userId) => {
+      if (err)
+        res.send(err);
+      userId.tokenSub = req.body.tokenSub;
+      userId.trivias = req.body.trivias;
+      userId.save(err => {
         if (err)
           res.send(err);
-        userId.tokenSub = req.body.tokenSub;
-        userId.trivias = req.body.trivias;
-        userId.save(err => {
-          if (err)
-            res.send(err);
-          res.json({message: "User updated!"});
-        });
+        res.json({message: "User updated!"});
       });
-    })
-    .delete(({
-      params
-    }, res) => {
-      UserSchema.userId.remove({
-        _id: params.userId_id
-      }, (err, userId) => {
-        if (err)
-          res.send(err);
-        res.json({message: "User removed!"});
     });
-})
+  })
+  .delete(({
+    params
+  }, res) => {
+    UserSchema.userId.remove({
+      _id: params.userId_id
+    }, (err, userId) => {
+      if (err)
+        res.send(err);
+      res.json({message: "User removed!"});
+    });
+  });
 //Routes for TriviaSchema
 
 router.route('/trivia')

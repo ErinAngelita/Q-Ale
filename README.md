@@ -34,6 +34,11 @@
 - nested user POST route to include trivias, rounds, and questions
 - started testing nested populate functions (deep population for days)
 
+### 3/8/18
+- implemented deep population for our POST userid functions
+- Edited site structure and made createquiz in navbar
+- started exploring route variation and tested with createquiz (worked!)
+
 
 ````````// Multi-process to utilize all CPU cores.
 // if (cluster.isMaster) {

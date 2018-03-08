@@ -7,7 +7,6 @@ import Navbar from './Navbar.jsx';
 import Header from './Header.js';
 import Main from './Main.js';
 import LoginPage from './auth/LoginPage.js';
-import TestRoute from './TestRoute.js';
 import Home from './Home';
 import CreateQuiz from './CreateQuiz';
 import Profile from './Profile.jsx';
@@ -33,7 +32,6 @@ class App extends Component {
               <Route path="/login" component={LoginPage} />
               <SecureRoute path="/createquiz" component={CreateQuiz} />
               <SecureRoute path="/profile" component={Profile} />
-              <SecureRoute path="/testRoute" component={TestRoute} />
             </Container>
           </Security>
         </Router>
