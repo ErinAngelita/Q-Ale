@@ -3,10 +3,10 @@ import { withAuth } from '@okta/okta-react';
 
 import { checkAuthentication } from './helpers';
 
-export default withAuth(class ReturnField extends Component {
+export default withAuth(class CreateQuiz extends Component {
   constructor(props){
     super(props);
-    this.state = {text: "", userinfo: null, authenticated: null};
+    this.state = {text: "", userinfo: null, authenticated: null, triva_id: ""};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkAuthentication = checkAuthentication.bind(this);
@@ -26,7 +26,7 @@ export default withAuth(class ReturnField extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    fetch('/api/bananas', {
+    fetch('/api/createquiz', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -48,12 +48,6 @@ export default withAuth(class ReturnField extends Component {
         </label>
         <label> Date:
           <input id="date" type="date" />
-        </label>
-        <label> Rounds Per Quiz:
-          <input type="number" min="1" max="10" />
-        </label>
-        <label> Questions Per Round:
-          <input type="number" min="1" max="10" />
         </label>
         <input type="submit" value="Create Quiz!" />
       </form>

@@ -49,7 +49,11 @@ router.get('/', (req, res) => {
 
 // Routes for UserSchema
 
-router.route('/bananas')
+
+
+
+
+router.route('/createquiz')
 
   .post((req, res) => {
     const userId = new UserSchema.userId();
@@ -64,7 +68,7 @@ router.route('/bananas')
       console.log("saved");
       if (err)
         res.send(err);
-      res.json({message: "User created with a BANANA!!"});
+      res.json(trivia._id);
     });
   })
   .get((req, res) => {
@@ -74,6 +78,31 @@ router.route('/bananas')
       res.json(userId);
     });
   });
+
+router.route('/textroundinput/:trivia_id')
+  .post((req, res) => {
+    TriviaSchema.trivia.findById(req.params.trivia_id, (err, trivia) => {
+      if(err)
+        res.send(err);
+      const round = new RoundSchema.round({
+        category: req.body.category
+      });
+      const question = new QuestionSchema.question({
+        question: req.body.question,
+        answer: req.body.answer
+      });
+      round.save();
+      question.save();
+      trivia.rounds.push(round);
+      round.questions.push(question);
+      trivia.save(err => {
+        if(err)
+          res.send(err);
+        res.json({message: "Added round category and questions!"});
+      });
+    });
+  });
+
 router.route('/userId')
 
   .get((req, res) => {
