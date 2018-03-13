@@ -4,7 +4,7 @@ const RoundSchema = require('./RoundSchema.js');
 const TriviaSchema = new Schema({
   name: String,
   date: String,
-  rounds: [{ type: Schema.Types.ObjectId, ref: 'round' }]
+  rounds: [{ type: Schema.Types.ObjectId, ref: 'round' } || null]
 });
 
 let trivia = mongoose.model('trivia', TriviaSchema);

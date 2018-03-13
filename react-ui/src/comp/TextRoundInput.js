@@ -7,7 +7,7 @@ import CreateQuiz from './CreateQuiz.js';
 export default withAuth(class TextRoundInput extends Component {
   constructor(props){
     super(props);
-    this.state = {text: "", userinfo: null, authenticated: null};
+    this.state = {text: "", userinfo: null, authenticated: null, trivia_id: this.props.trivia_id};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkAuthentication = checkAuthentication.bind(this);
   }
@@ -30,7 +30,6 @@ export default withAuth(class TextRoundInput extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        trivia_id: this.props.trivia_id,
         category: document.getElementById("roundcategory").value,
         question: document.getElementById("question1").value,
         answer: document.getElementById("answer1").value,

@@ -31,9 +31,9 @@ class App extends Component {
               <Route path="/" exact component={Home} />
               <Route path="/implicit/callback" component={ImplicitCallback} />
               <Route path="/login" component={LoginPage} />
-              <SecureRoute path="/createquiz" component={CreateQuiz} />
+              <SecureRoute path="/createquiz" trivia_id="this.state.trivia_id" component={CreateQuiz} />
               <SecureRoute path="/profile" component={Profile} />
-              <SecureRoute path="/textroundinput" component={TextRoundInput} />
+              <SecureRoute path="/textroundinput" trivia_id="this.state.trivia_id" component={TextRoundInput} />
             </Container>
           </Security>
         </Router>
