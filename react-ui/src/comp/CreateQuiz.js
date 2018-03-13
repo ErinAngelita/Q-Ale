@@ -6,7 +6,7 @@ import { checkAuthentication } from './helpers';
 export default withAuth(class CreateQuiz extends Component {
   constructor(props){
     super(props);
-    this.state = {text: "", userinfo: null, authenticated: null, triva_id: ""};
+    this.state = {text: "", userinfo: null, authenticated: null, trivia_id: ""};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkAuthentication = checkAuthentication.bind(this);
