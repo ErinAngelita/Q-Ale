@@ -5,7 +5,7 @@ import { checkAuthentication } from './helpers';
 export default withAuth(class CreateQuiz extends Component {
   constructor(props){
     super(props);
-    this.state = {text: "", userinfo: null, authenticated: null};
+    this.state = {text: "", userinfo: null, authenticated: null, trivia_id: ""};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkAuthentication = checkAuthentication.bind(this);
@@ -24,7 +24,7 @@ export default withAuth(class CreateQuiz extends Component {
     this.setState({text: event.target.value});
   }
   handleSubmit(event) {
-
+    event.preventDefault();
     fetch('/api/userId', {
       method: 'POST',
       mode: 'cors',
@@ -61,6 +61,8 @@ export default withAuth(class CreateQuiz extends Component {
         }]
       })
     })
+    console.log(document.getElementById("quizname").value);
+    this.setState({trivia_id: document.getElementById("quizname").value});
   }
   render(){
     return(
