@@ -2,37 +2,43 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cluster = require('cluster');
-const numCPUs = require('os').cpus().length;
+const passport = require('passport');
+const config = require('./config');
 
-const PORT = process.env.PORT || 5000;
 const db = process.env.MONGODB_URI || 'mongodb://localhost/trivia';
 
-
-
-const app = express();
 mongoose.Promise = require('bluebird');
+
 const UserSchema = require('./models/UserSchema.js');
 const TriviaSchema = require('./models/TriviaSchema.js');
 const RoundSchema = require('./models/RoundSchema.js');
 const QuestionSchema = require('./models/QuestionSchema.js');
 const router = express.Router();
 
-// Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
-// check to see I if I need this...
+require('./models').connect(db);
 
-// connect to database
+const app = express();
+
+app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
+
+const localSignupStrategy = require('./passport/local-signup');
+const localLoginStrategy = require('./passport/local-login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
+
+const authCheckMiddleware = require('./middleware/auth-check');
+app.use('/api', authCheckMiddleware);
+
+const authRoutes = require('./routes/auth');
+const apiRoutes = require('./routes/api');
+app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
+app.set('port', (process.env.PORT || 5000));
+
 mongoose.connection.openUri(db);
 
-// Answer API requests.
 app.get('/api', function(req, res) {
   res.set('Content-Type', 'application/json');
   res.send('{"message":"Hello from the custom server!"}');
@@ -47,14 +53,7 @@ router.get('/', (req, res) => {
   res.json({message: "What's up? Welcome to QuizPig!~"});
 });
 
-// Routes for UserSchema
-
-
-
-
-
 router.route('/createquiz')
-
   .post((req, res) => {
     const userId = new UserSchema.userId();
     userId.tokenSub = req.body.tokenSub;
@@ -65,7 +64,6 @@ router.route('/createquiz')
     trivia.save();
     userId.trivias.push(trivia);
     userId.save(err => {
-      console.log("saved");
       if (err)
         res.send(err);
       res.json(trivia._id);
@@ -412,13 +410,11 @@ router.route('/question/:question_id')
 
 //End of QuestionSchema
 
-app.use('/api', router);
-
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {
   response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
 });
 
-app.listen(PORT, function() {
-  console.error(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
+app.listen(app.get('port'), () => {
+  console.log(`Server is running on port ${app.get('port')}`);
 });
