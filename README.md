@@ -39,6 +39,13 @@
 - Edited site structure and made createquiz in navbar
 - started exploring route variation and tested with createquiz (worked!)
 
+### 3/9/18
+- added textroundinput.js file
+- started working on passing props from createquiz to textroundinput so that we can link info from previous page to new page
+- added a POST route to index.js for textroundinput
+
+
+
 
 ````````// Multi-process to utilize all CPU cores.
 // if (cluster.isMaster) {
