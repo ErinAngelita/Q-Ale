@@ -48,6 +48,8 @@ export default withAuth(class Navbar extends Component {
             {this.state.authenticated === true && <Menu.Item id="textroundinput-button" as="a" href="/textroundinput" >Text Round Input</Menu.Item>}
           </Container>
         </Menu>
+        <div>
+        </div>
       </div>
     );
   }
