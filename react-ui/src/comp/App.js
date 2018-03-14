@@ -29,9 +29,9 @@ class App extends Component {
       trivia_id:newTriviaId,
     });
   }
-
   render() {
     return (
+
       <div>
         <Router>
           <Security
@@ -54,6 +54,7 @@ class App extends Component {
             </Container>
           </Security>
         </Router>
+        <div>{console.log(this.state.trivia_id)}</div>
       </div>
     );
   }
