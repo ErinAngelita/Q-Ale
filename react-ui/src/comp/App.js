@@ -17,8 +17,15 @@ function customAuthHandler ({ history }) {
 }
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      trivia_id: ""
+    };
+  }
   render() {
     return (
+
       <div>
         <Router>
           <Security
@@ -31,12 +38,14 @@ class App extends Component {
               <Route path="/" exact component={Home} />
               <Route path="/implicit/callback" component={ImplicitCallback} />
               <Route path="/login" component={LoginPage} />
-              <SecureRoute path="/createquiz" component={CreateQuiz} />
+              <SecureRoute path="/createquiz"
+                render ={(props) => ( <CreateQuiz {...props} /> ) } />
               <SecureRoute path="/profile" component={Profile} />
               <SecureRoute path="/textroundinput" component={TextRoundInput} />
             </Container>
           </Security>
         </Router>
+        <div>{console.log(this.state.trivia_id)}</div>
       </div>
     );
   }
