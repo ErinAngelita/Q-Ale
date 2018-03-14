@@ -3,29 +3,35 @@ import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
 
 export default withAuth(class CreateQuiz extends Component {
-  constructor(props){
-    super(props);
-    this.state = {text: "", userinfo: null, authenticated: null, trivia_id: ""};
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.checkAuthentication = checkAuthentication.bind(this);
+  constructor( props ) {
+    super( props );
+    this.state = {
+      text: " ",
+      userinfo: null,
+      authenticated: null,
+    };
+    this.handleChange = this.handleChange.bind( this );
+    this.handleSubmit = this.handleSubmit.bind( this );
+    this.checkAuthentication = checkAuthentication.bind( this );
   }
-
   async componentDidMount() {
       this.checkAuthentication();
   }
-
   async componentDidUpdate() {
       this.checkAuthentication();
   }
 
-  handleChange(event) {
-    console.log(event.target.value);
-    this.setState({text: event.target.value});
+  passToApp(mereow) {
+    this.props.updateTriviaId(mereow)
   }
-  handleSubmit(event) {
+
+  handleChange( event ) {
+    console.log( event.target.value );
+    this.setState( {text: event.target.value} );
+  }
+  handleSubmit( event ) {
     event.preventDefault();
-    fetch('/api/userId', {
+    fetch( '/api/createquiz', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -34,39 +40,23 @@ export default withAuth(class CreateQuiz extends Component {
       },
       body: JSON.stringify({
         tokenSub: this.state.userinfo.sub,
-        name: document.getElementById("quizname").value,
-        date: document.getElementById("date").value,
-        round: [{
-          category: document.getElementById("roundcategory").value,
-          question1: document.getElementById("question1").value,
-          answer1: document.getElementById("answer1").value,
-          question2: document.getElementById("question2").value,
-          answer2: document.getElementById("answer2").value,
-          question3: document.getElementById("question3").value,
-          answer3: document.getElementById("answer3").value,
-          question4: document.getElementById("question4").value,
-          answer4: document.getElementById("answer4").value,
-          question5: document.getElementById("question5").value,
-          answer5: document.getElementById("answer5").value,
-          question6: document.getElementById("question6").value,
-          answer6: document.getElementById("answer6").value,
-          question7: document.getElementById("question7").value,
-          answer7: document.getElementById("answer7").value,
-          question8: document.getElementById("question8").value,
-          answer8: document.getElementById("answer8").value,
-          question9: document.getElementById("question9").value,
-          answer9: document.getElementById("answer9").value,
-          question10: document.getElementById("question10").value,
-          answer10: document.getElementById("answer10").value,
-        }]
+        name: document.getElementById( "quizname" ).value,
+        date: document.getElementById( "date" ).value
       })
     })
-    console.log(document.getElementById("quizname").value);
-    this.setState({trivia_id: document.getElementById("quizname").value});
+    .then((res) =>
+      res.json())
+    .then((data) => {
+      this.passToApp(data);
+    })
+    this.props.auth._history.push("/textroundinput")
   }
-  render(){
+  render() {
     return(
       <div>
+        <p>
+          {this.props.trivia_id}
+        </p>
       <form onSubmit = {this.handleSubmit}>
         <label> Quizname:
           <input id="quizname" type="text" value={this.state.value} onChange={this.handleChange} />

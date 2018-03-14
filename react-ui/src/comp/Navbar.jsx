@@ -18,7 +18,8 @@ import { checkAuthentication } from './helpers';
 export default withAuth(class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { authenticated: null };
+    this.state = { authenticated: null,  trivia_id: ""};
+
     this.checkAuthentication = checkAuthentication.bind(this);
   }
 
@@ -40,13 +41,15 @@ export default withAuth(class Navbar extends Component {
               &nbsp;
               Okta-React Sample Project
             </Menu.Item>
-            {this.state.authenticated === true && <Menu.Item id="createquiz-button" as="a" href="/createquiz"><Icon name="mail outline" />Create Quiz</Menu.Item>}
+            {this.state.authenticated === true && <Menu.Item id="createquiz-button" as="a" href="/createquiz" ><Icon name="mail outline" />Create Quiz</Menu.Item>}
             {this.state.authenticated === true && <Menu.Item id="profile-button" as="a" href="/profile">Profile</Menu.Item>}
             {this.state.authenticated === true && <Menu.Item id="logout-button" as="a" onClick={this.props.auth.logout}>Logout</Menu.Item>}
             {this.state.authenticated === false && <Menu.Item as="a" onClick={this.props.auth.login}>Login</Menu.Item>}
-            {this.state.authenticated === true && <Menu.Item id="textroundinput-button" as="a" href="/textroundinput">Text Round Input</Menu.Item>}
+            {this.state.authenticated === true && <Menu.Item id="textroundinput-button" as="a" href="/textroundinput" >Text Round Input</Menu.Item>}
           </Container>
         </Menu>
+        <div>
+        </div>
       </div>
     );
   }

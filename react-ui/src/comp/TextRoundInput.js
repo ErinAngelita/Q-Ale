@@ -4,11 +4,15 @@ import { checkAuthentication } from './helpers';
 import CreateQuiz from './CreateQuiz.js';
 
 export default withAuth(class TextRoundInput extends Component {
-  constructor(props){
-    super(props);
-    this.state = {text: "", userinfo: null, authenticated: null, user_id: ""};
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.checkAuthentication = checkAuthentication.bind(this);
+  constructor( props ) {
+    super( props );
+    this.state = {
+      text: " ",
+      userinfo: null,
+      authenticated: null
+    };
+    this.handleSubmit = this.handleSubmit.bind( this );
+    this.checkAuthentication = checkAuthentication.bind( this );
   }
 
   async componentDidMount() {
@@ -29,7 +33,6 @@ export default withAuth(class TextRoundInput extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        trivia_id: this.props.trivia_id,
         category: document.getElementById("roundcategory").value,
         question1: document.getElementById("question1").value,
         answer1: document.getElementById("answer1").value,
@@ -51,40 +54,45 @@ export default withAuth(class TextRoundInput extends Component {
         answer9: document.getElementById("answer9").value,
         question10: document.getElementById("question10").value,
         answer10: document.getElementById("answer10").value,
-
       })
     })
   }
-  render(){
+
+  render() {
     return(
-      <form onSubmit = {this.handleSubmit}>
-        <label> Round Category:
-          <input id="roundcategory" type="text" value={this.state.value} />
-        </label>
-        <ul>
-          <input id="question1" type="text" value={this.state.value} />
-          <input id="answer1" type="text" value={this.state.value} />
-          <input id="question2" type="text" value={this.state.value} />
-          <input id="answer2" type="text" value={this.state.value} />
-          <input id="question3" type="text" value={this.state.value} />
-          <input id="answer3" type="text" value={this.state.value} />
-          <input id="question4" type="text" value={this.state.value} />
-          <input id="answer4" type="text" value={this.state.value} />
-          <input id="question5" type="text" value={this.state.value} />
-          <input id="answer5" type="text" value={this.state.value} />
-          <input id="question6" type="text" value={this.state.value} />
-          <input id="answer6" type="text" value={this.state.value} />
-          <input id="question7" type="text" value={this.state.value} />
-          <input id="answer7" type="text" value={this.state.value} />
-          <input id="question8" type="text" value={this.state.value} />
-          <input id="answer8" type="text" value={this.state.value} />
-          <input id="question9" type="text" value={this.state.value} />
-          <input id="answer9" type="text" value={this.state.value} />
-          <input id="question10" type="text" value={this.state.value} />
-          <input id="answer10" type="text" value={this.state.value} />
-        </ul>
-        <input type="submit" value="Create Quiz!" />
-      </form>
+      <div>
+        <p>
+          {this.props.trivia_id}
+        </p>
+        <form onSubmit = {this.handleSubmit}>
+          <label> Round Category:
+            <input id="roundcategory" type="text" value={this.state.value} />
+          </label>
+          <li>
+            <input id="question1" type="text" value={this.state.value} />
+            <input id="answer1" type="text" value={this.state.value} />
+            <input id="question2" type="text" value={this.state.value} />
+            <input id="answer2" type="text" value={this.state.value} />
+            <input id="question3" type="text" value={this.state.value} />
+            <input id="answer3" type="text" value={this.state.value} />
+            <input id="question4" type="text" value={this.state.value} />
+            <input id="answer4" type="text" value={this.state.value} />
+            <input id="question5" type="text" value={this.state.value} />
+            <input id="answer5" type="text" value={this.state.value} />
+            <input id="question6" type="text" value={this.state.value} />
+            <input id="answer6" type="text" value={this.state.value} />
+            <input id="question7" type="text" value={this.state.value} />
+            <input id="answer7" type="text" value={this.state.value} />
+            <input id="question8" type="text" value={this.state.value} />
+            <input id="answer8" type="text" value={this.state.value} />
+            <input id="question9" type="text" value={this.state.value} />
+            <input id="answer9" type="text" value={this.state.value} />
+            <input id="question10" type="text" value={this.state.value} />
+            <input id="answer10" type="text" value={this.state.value} />
+          </li>
+          <input type="submit" value="Create Quiz!" />
+        </form>
+      </div>
     );
   }
 })

@@ -8,8 +8,6 @@ const numCPUs = require('os').cpus().length;
 const PORT = process.env.PORT || 5000;
 const db = process.env.MONGODB_URI || 'mongodb://localhost/trivia';
 
-
-
 const app = express();
 mongoose.Promise = require('bluebird');
 const UserSchema = require('./models/UserSchema.js');
@@ -22,16 +20,8 @@ const router = express.Router();
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
-// check to see I if I need this...
-
 // connect to database
 mongoose.connection.openUri(db);
-
 // Answer API requests.
 app.get('/api', function(req, res) {
   res.set('Content-Type', 'application/json');
@@ -48,11 +38,6 @@ router.get('/', (req, res) => {
 });
 
 // Routes for UserSchema
-
-
-
-
-
 router.route('/createquiz')
 
   .post((req, res) => {
@@ -159,7 +144,6 @@ router.route('/userId')
       res.json({message: "User created with a quiz!!"});
     });
   });
-
 
 router.route('/userId/:userId_id')
   .get((req, res) => {
@@ -291,34 +275,7 @@ router.route('/trivia/:trivia_id')
 
 //Begining of RoundSchema started working on first .post
 
-router.route('/round')
 
-  .post((req, res) => {
-    const round = new RoundSchema.round();
-    round.category = req.body.category;
-    round.roundNumber = req.body.roundNumber;
-    const question = new QuestionSchema.question({
-      question: "hey",
-      answer: "you",
-      is_Img: false,
-      img_Url: "there"
-    });
-    round.questions.push(question);
-    round.save(err => {
-      console.log("saved");
-      if (err)
-        res.send(err);
-      res.json({message: "Round created with a question!!"});
-    });
-  })
-
-  .get((req, res) => {
-    RoundSchema.round.find((err, round) => {
-      if (err)
-        res.send(err);
-      res.json(round);
-    });
-  });
 
 router.route('/round/:round_id')
 

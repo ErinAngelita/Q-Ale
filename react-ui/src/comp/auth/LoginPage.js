@@ -5,7 +5,7 @@ import '../../css/LoginPage.css';
 import config from './.samples.config.js';
 
 export default class LoginPage extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.signIn = new OktaSignIn({
       baseUrl: config.oidc.issuer.split('/oauth2')[0],
