@@ -65,27 +65,59 @@ router.route('/createquiz')
   });
 
 router.route('/textroundinput/:trivia_id')
-  .post((req, res) => {
+  .put((req, res) => {
     TriviaSchema.trivia.findById(req.params.trivia_id, (err, trivia) => {
-      if(err)
+      if (err)
         res.send(err);
       const round = new RoundSchema.round({
-        category: req.body.category
-      });
-      const question = new QuestionSchema.question({
-        question: req.body.question,
-        answer: req.body.answer
+        category: "meow"
       });
       round.save();
-      question.save();
       trivia.rounds.push(round);
-      round.questions.push(question);
       trivia.save(err => {
         if(err)
           res.send(err);
         res.json({message: "Added round category and questions!"});
       });
     });
+    // TriviaSchema.trivia.findById(req.params.trivia_id, (err, trivia) => {
+    //   if(err)
+    //     res.send(err);
+    //   const round = new RoundSchema.round({
+    //     category: req.body.category
+    //   });
+    //   const question = new QuestionSchema.question({
+    //     question1: req.body.question1,
+    //     answer1: req.body.answer1,
+    //     question2: req.body.question2,
+    //     answer2: req.body.answer2,
+    //     question3: req.body.question3,
+    //     answer3: req.body.answer3,
+    //     question4: req.body.question4,
+    //     answer4: req.body.answer4,
+    //     question5: req.body.question5,
+    //     answer5: req.body.answer5,
+    //     question6: req.body.question6,
+    //     answer6: req.body.answer6,
+    //     question7: req.body.question7,
+    //     answer7: req.body.answer7,
+    //     question8: req.body.question8,
+    //     answer8: req.body.answer8,
+    //     question9: req.body.question9,
+    //     answer9: req.body.answer9,
+    //     question10: req.body.question10,
+    //     answer10: req.body.answer10,
+    //   });
+    //   round.save();
+    //   question.save();
+    //   trivia.rounds.push(round);
+    //   round.questions.push(question);
+    //   trivia.save(err => {
+    //     if(err)
+    //       res.send(err);
+    //     res.json({message: "Added round category and questions!"});
+    //   });
+    // });
   });
 
 router.route('/userId')
@@ -95,6 +127,16 @@ router.route('/userId')
       if (err)
         res.send(err);
       res.json(userId);
+    });
+  })
+
+  .delete(({
+    params
+  }, res) => {
+    UserSchema.userId.remove((err, userId) => {
+      if (err)
+        res.send(err);
+      res.json({message: "Users removed!"});
     });
   })
 
@@ -277,6 +319,47 @@ router.route('/trivia/:trivia_id')
 
 
 
+
+
+router.route('/round')
+
+  .post((req, res) => {
+    const round = new RoundSchema.round();
+    round.category = req.body.category;
+    round.roundNumber = req.body.roundNumber;
+    const question = new QuestionSchema.question({
+      question: "hey",
+      answer: "you",
+      is_Img: false,
+      img_Url: "there"
+    });
+    round.questions.push(question);
+    round.save(err => {
+      console.log("saved");
+      if (err)
+        res.send(err);
+      res.json({message: "Round created with a question!!"});
+    });
+  })
+
+  .get((req, res) => {
+    RoundSchema.round.find((err, round) => {
+      if (err)
+        res.send(err);
+      res.json(round);
+    });
+  })
+
+  .delete(({
+    params
+  }, res) => {
+    RoundSchema.round.remove((err, round) => {
+      if (err)
+        res.send(err);
+      res.json({message: "rounds removed!"});
+    });
+  });
+
 router.route('/round/:round_id')
 
   .post((req, res) => {
@@ -358,6 +441,16 @@ router.route('/question')
       if (err)
         res.send(err);
       res.json(question);
+    });
+  })
+
+  .delete(({
+    params
+  }, res) => {
+    QuestionSchema.question.remove((err, question) => {
+      if (err)
+        res.send(err);
+      res.json({message: "questions removed!"});
     });
   });
 

@@ -4,8 +4,6 @@ import { Security, SecureRoute, ImplicitCallback, render } from '@okta/okta-reac
 import { Container } from 'semantic-ui-react';
 import config from './auth/.samples.config.js';
 import Navbar from './Navbar.jsx';
-import Header from './Header.js';
-import Main from './Main.js';
 import LoginPage from './auth/LoginPage.js';
 import Home from './Home';
 import Profile from './Profile.jsx';

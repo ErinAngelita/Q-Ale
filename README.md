@@ -44,6 +44,12 @@
 - started working on passing props from createquiz to textroundinput so that we can link info from previous page to new page
 - added a POST route to index.js for textroundinput
 
+########3/14/2018
+- we finally figured out how to pass props. oh wow!
+- working on routes to post to trivias with multiple rounds.
+- in progress route "textroundinput/:trivia_id"
+- make sure to test all routes with hard codes because its simple!
+
 
 
 

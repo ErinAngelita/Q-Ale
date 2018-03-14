@@ -68,7 +68,7 @@ export default withAuth(class TextRoundInput extends Component {
           <label> Round Category:
             <input id="roundcategory" type="text" value={this.state.value} />
           </label>
-          <li>
+          <ul>
             <input id="question1" type="text" value={this.state.value} />
             <input id="answer1" type="text" value={this.state.value} />
             <input id="question2" type="text" value={this.state.value} />
@@ -89,7 +89,7 @@ export default withAuth(class TextRoundInput extends Component {
             <input id="answer9" type="text" value={this.state.value} />
             <input id="question10" type="text" value={this.state.value} />
             <input id="answer10" type="text" value={this.state.value} />
-          </li>
+          </ul>
           <input type="submit" value="Create Quiz!" />
         </form>
       </div>
