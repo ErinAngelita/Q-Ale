@@ -48,7 +48,7 @@ export default withAuth(class CreateQuiz extends Component {
     .then((data) => {
       this.passToApp(data);
     })
-    this.props.auth._history.push("/textroundinput")
+    this.props.auth._history.push("/textroundinput1")
   }
   render() {
     return(

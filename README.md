@@ -1,13 +1,13 @@
 
 # Trivia Night
 
-#### 2/28/18
+### 2/28/18
 - Converted files into create-react-app-buildpack structure.
 - Pushed to Heroku https://enigmatic-coast-39458.herokuapp.com/
 - linked mLabs account to Heroku
 - scrapped everything up until this point.... # ILoveLearning
 
-#### 3/1/18
+### 3/1/18
 - added Okta Authentication
 - Created file structure for components
 - having issues with redirects from login and login on heroku
@@ -44,11 +44,15 @@
 - started working on passing props from createquiz to textroundinput so that we can link info from previous page to new page
 - added a POST route to index.js for textroundinput
 
-########3/14/2018
+### 3/14/2018
 - we finally figured out how to pass props. oh wow!
 - working on routes to post to trivias with multiple rounds.
 - in progress route "textroundinput/:trivia_id"
 - make sure to test all routes with hard codes because its simple!
+
+### 3/15/18
+- successfully wrote PUT route on the back end in TextRoundInput
+- successfully linked front-end route to back end (textroundinput)
 
 
 

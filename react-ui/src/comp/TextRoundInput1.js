@@ -3,7 +3,7 @@ import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
 import CreateQuiz from './CreateQuiz.js';
 
-export default withAuth(class TextRoundInput extends Component {
+export default withAuth(class TextRoundInput1 extends Component {
   constructor( props ) {
     super( props );
     this.state = {
@@ -56,13 +56,14 @@ export default withAuth(class TextRoundInput extends Component {
         answer10: document.getElementById("answer10").value,
       })
     })
+    this.props.auth._history.push("/textroundinput2")
   }
 
   render() {
     return(
       <div>
         <p>
-          {this.props.trivia_id}
+          Round 1
         </p>
         <form onSubmit = {this.handleSubmit}>
           <label> Round Category:

@@ -7,8 +7,13 @@ import Navbar from './Navbar.jsx';
 import LoginPage from './auth/LoginPage.js';
 import Home from './Home';
 import Profile from './Profile.jsx';
-import TextRoundInput from './TextRoundInput.js';
 import CreateQuiz from './CreateQuiz';
+import TextRoundInput1 from './TextRoundInput1.js';
+import TextRoundInput2 from './TextRoundInput2.js';
+import TextRoundInput3 from './TextRoundInput3.js';
+import TextRoundInput4 from './TextRoundInput4.js';
+import TextRoundInput5 from './TextRoundInput5.js';
+
 
 function customAuthHandler ({ history }) {
   history.push('/login');
@@ -46,12 +51,23 @@ class App extends Component {
                 render={() => <CreateQuiz trivia_id={this.state.trivia_id} updateTriviaId={this.updateTriviaId.bind(this)} /> } />
               <SecureRoute path="/profile" component={Profile} />
               <SecureRoute
-                path="/textroundinput"
-                render={() => <TextRoundInput trivia_id={this.state.trivia_id} /> } />
+                path="/textroundinput1"
+                render={() => <TextRoundInput1 trivia_id={this.state.trivia_id} /> } />
+              <SecureRoute
+                path="/textroundinput2"
+                render={() => <TextRoundInput2 trivia_id={this.state.trivia_id} /> } />
+              <SecureRoute
+                path="/textroundinput3"
+                render={() => <TextRoundInput3 trivia_id={this.state.trivia_id} /> } />
+              <SecureRoute
+                path="/textroundinput4"
+                render={() => <TextRoundInput4 trivia_id={this.state.trivia_id} /> } />
+              <SecureRoute
+                path="/textroundinput5"
+                render={() => <TextRoundInput5 trivia_id={this.state.trivia_id} /> } />
             </Container>
           </Security>
         </Router>
-        <div>{console.log(this.state.trivia_id)}</div>
       </div>
     );
   }
