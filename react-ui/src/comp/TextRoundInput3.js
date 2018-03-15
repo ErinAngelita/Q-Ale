@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
-import CreateQuiz from './CreateQuiz.js';
 
 export default withAuth(class TextRoundInput3 extends Component {
   constructor( props ) {

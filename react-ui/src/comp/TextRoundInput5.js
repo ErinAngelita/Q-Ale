@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
-import CreateQuiz from './CreateQuiz.js';
 
 export default withAuth(class TextRoundInput5 extends Component {
   constructor( props ) {
@@ -56,6 +55,7 @@ export default withAuth(class TextRoundInput5 extends Component {
         answer10: document.getElementById("answer10").value,
       })
     })
+    this.props.auth._history.push("/quizreview")
   }
 
   render() {
@@ -99,7 +99,7 @@ export default withAuth(class TextRoundInput5 extends Component {
             <input id="question10" type="text" value={this.state.value} />
             <input id="answer10" type="text" value={this.state.value} />
           </ul>
-          <input type="submit" value="Create Round!" />
+          <input type="submit" value="Quiz Created!" />
         </form>
       </div>
     );

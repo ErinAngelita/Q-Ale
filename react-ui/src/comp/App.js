@@ -13,6 +13,7 @@ import TextRoundInput2 from './TextRoundInput2.js';
 import TextRoundInput3 from './TextRoundInput3.js';
 import TextRoundInput4 from './TextRoundInput4.js';
 import TextRoundInput5 from './TextRoundInput5.js';
+import QuizReview from './QuizReview.js';
 
 
 function customAuthHandler ({ history }) {
@@ -65,6 +66,9 @@ class App extends Component {
               <SecureRoute
                 path="/textroundinput5"
                 render={() => <TextRoundInput5 trivia_id={this.state.trivia_id} /> } />
+              <SecureRoute
+                path="/quizreview"
+                render={() => <QuizReview trivia_id={this.state.trivia_id} /> } />
             </Container>
           </Security>
         </Router>

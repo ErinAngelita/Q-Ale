@@ -123,6 +123,23 @@ router.route('/textroundinput/:trivia_id')
     });
   });
 
+//________________________________________________________________QUIZ_REVIEW__
+
+router.route('/quizreview/:trivia_id')
+
+  .get((req, res) => {
+    TriviaSchema.trivia.findById(req.params.trivia_id).populate({
+      path: 'rounds',
+      populate: {
+        path: 'questions'
+      }
+    }).exec((err, userId) => {
+      if (err)
+        res.send(err);
+      res.json(userId);
+    });
+  });
+
 //_______________________________________________________________________USER__
 // Routes for UserSchema
 
