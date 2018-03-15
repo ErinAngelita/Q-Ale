@@ -25,9 +25,8 @@ export default withAuth(class TextRoundInput extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch('/api/textroundinput/:trivia_id', {
+    fetch('/api/textroundinput/' + this.props.trivia_id, {
       method: 'PUT',
-      trivia_id: this.props.trivia_id,
       mode: 'cors',
       headers: {
         'Accept': 'application/json',
