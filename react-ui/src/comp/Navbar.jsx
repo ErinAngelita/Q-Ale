@@ -45,7 +45,6 @@ export default withAuth(class Navbar extends Component {
             {this.state.authenticated === true && <Menu.Item id="profile-button" as="a" href="/profile">Profile</Menu.Item>}
             {this.state.authenticated === true && <Menu.Item id="logout-button" as="a" onClick={this.props.auth.logout}>Logout</Menu.Item>}
             {this.state.authenticated === false && <Menu.Item as="a" onClick={this.props.auth.login}>Login</Menu.Item>}
-            {this.state.authenticated === true && <Menu.Item id="textroundinput-button" as="a" href="/textroundinput" >Text Round Input</Menu.Item>}
           </Container>
         </Menu>
         <div>

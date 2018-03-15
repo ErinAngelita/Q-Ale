@@ -26,7 +26,6 @@ export default withAuth(class CreateQuiz extends Component {
   }
 
   handleChange( event ) {
-    console.log( event.target.value );
     this.setState( {text: event.target.value} );
   }
   handleSubmit( event ) {
@@ -54,9 +53,6 @@ export default withAuth(class CreateQuiz extends Component {
   render() {
     return(
       <div>
-        <p>
-          {this.props.trivia_id}
-        </p>
       <form onSubmit = {this.handleSubmit}>
         <label> Quizname:
           <input id="quizname" type="text" value={this.state.value} onChange={this.handleChange} />

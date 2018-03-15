@@ -9,7 +9,7 @@ export default withAuth(class TextRoundInput extends Component {
     this.state = {
       text: " ",
       userinfo: null,
-      authenticated: null
+      authenticated: null,
     };
     this.handleSubmit = this.handleSubmit.bind( this );
     this.checkAuthentication = checkAuthentication.bind( this );
@@ -26,7 +26,8 @@ export default withAuth(class TextRoundInput extends Component {
   handleSubmit(event) {
     event.preventDefault();
     fetch('/api/textroundinput/:trivia_id', {
-      method: 'POST',
+      method: 'PUT',
+      trivia_id: this.props.trivia_id,
       mode: 'cors',
       headers: {
         'Accept': 'application/json',
@@ -71,26 +72,35 @@ export default withAuth(class TextRoundInput extends Component {
           <ul>
             <input id="question1" type="text" value={this.state.value} />
             <input id="answer1" type="text" value={this.state.value} />
+            <br/>
             <input id="question2" type="text" value={this.state.value} />
             <input id="answer2" type="text" value={this.state.value} />
+            <br/>
             <input id="question3" type="text" value={this.state.value} />
             <input id="answer3" type="text" value={this.state.value} />
+            <br/>
             <input id="question4" type="text" value={this.state.value} />
             <input id="answer4" type="text" value={this.state.value} />
+            <br/>
             <input id="question5" type="text" value={this.state.value} />
             <input id="answer5" type="text" value={this.state.value} />
+            <br/>
             <input id="question6" type="text" value={this.state.value} />
             <input id="answer6" type="text" value={this.state.value} />
+            <br/>
             <input id="question7" type="text" value={this.state.value} />
             <input id="answer7" type="text" value={this.state.value} />
+            <br/>
             <input id="question8" type="text" value={this.state.value} />
             <input id="answer8" type="text" value={this.state.value} />
+            <br/>
             <input id="question9" type="text" value={this.state.value} />
             <input id="answer9" type="text" value={this.state.value} />
+            <br/>
             <input id="question10" type="text" value={this.state.value} />
             <input id="answer10" type="text" value={this.state.value} />
           </ul>
-          <input type="submit" value="Create Quiz!" />
+          <input type="submit" value="Create Round!" />
         </form>
       </div>
     );
