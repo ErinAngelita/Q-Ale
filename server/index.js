@@ -37,7 +37,8 @@ router.get('/', (req, res) => {
   res.json({message: "What's up? Welcome to QuizPig!~"});
 });
 
-// Routes for UserSchema
+//________________________________________________________________CREATE_QUIZ__
+
 router.route('/createquiz')
 
   .post((req, res) => {
@@ -64,61 +65,66 @@ router.route('/createquiz')
     });
   });
 
+//___________________________________________________________TEXT_ROUND_INPUT__
+
 router.route('/textroundinput/:trivia_id')
+
+  .get((req, res) => {
+    TriviaSchema.trivia.findById(req.params.trivia_id).populate({
+      path: 'rounds',
+      populate: {
+        path: 'questions'
+      }
+    }).exec((err, userId) => {
+      if (err)
+        res.send(err);
+      res.json(userId);
+    });
+  })
+
   .put((req, res) => {
     TriviaSchema.trivia.findById(req.params.trivia_id, (err, trivia) => {
       if (err)
         res.send(err);
       const round = new RoundSchema.round({
-        category: "meow"
+        category: req.body.category
+      });
+      const question = new QuestionSchema.question({
+        question1: req.body.question1,
+        answer1: req.body.answer1,
+        question2: req.body.question2,
+        answer2: req.body.answer2,
+        question3: req.body.question3,
+        answer3: req.body.answer3,
+        question4: req.body.question4,
+        answer4: req.body.answer4,
+        question5: req.body.question5,
+        answer5: req.body.answer5,
+        question6: req.body.question6,
+        answer6: req.body.answer6,
+        question7: req.body.question7,
+        answer7: req.body.answer7,
+        question8: req.body.question8,
+        answer8: req.body.answer8,
+        question9: req.body.question9,
+        answer9: req.body.answer9,
+        question10: req.body.question10,
+        answer10: req.body.answer10,
       });
       round.save();
+      question.save();
       trivia.rounds.push(round);
+      round.questions.push(question);
       trivia.save(err => {
         if(err)
           res.send(err);
         res.json({message: "Added round category and questions!"});
       });
     });
-    // TriviaSchema.trivia.findById(req.params.trivia_id, (err, trivia) => {
-    //   if(err)
-    //     res.send(err);
-    //   const round = new RoundSchema.round({
-    //     category: req.body.category
-    //   });
-    //   const question = new QuestionSchema.question({
-    //     question1: req.body.question1,
-    //     answer1: req.body.answer1,
-    //     question2: req.body.question2,
-    //     answer2: req.body.answer2,
-    //     question3: req.body.question3,
-    //     answer3: req.body.answer3,
-    //     question4: req.body.question4,
-    //     answer4: req.body.answer4,
-    //     question5: req.body.question5,
-    //     answer5: req.body.answer5,
-    //     question6: req.body.question6,
-    //     answer6: req.body.answer6,
-    //     question7: req.body.question7,
-    //     answer7: req.body.answer7,
-    //     question8: req.body.question8,
-    //     answer8: req.body.answer8,
-    //     question9: req.body.question9,
-    //     answer9: req.body.answer9,
-    //     question10: req.body.question10,
-    //     answer10: req.body.answer10,
-    //   });
-    //   round.save();
-    //   question.save();
-    //   trivia.rounds.push(round);
-    //   round.questions.push(question);
-    //   trivia.save(err => {
-    //     if(err)
-    //       res.send(err);
-    //     res.json({message: "Added round category and questions!"});
-    //   });
-    // });
   });
+
+//_______________________________________________________________________USER__
+// Routes for UserSchema
 
 router.route('/userId')
 
@@ -245,6 +251,8 @@ router.route('/userId/:userId_id')
       res.json({message: "User removed!"});
     });
   });
+
+//_____________________________________________________________________TRIVIA__
 //Routes for TriviaSchema
 
 router.route('/trivia')
@@ -313,13 +321,9 @@ router.route('/trivia/:trivia_id')
       res.json({message: "Quiz removed!"});
     });
   });
-//end of TriviaSchema routes
 
-//Begining of RoundSchema started working on first .post
-
-
-
-
+//______________________________________________________________________ROUND__
+//Begining of RoundSchema
 
 router.route('/round')
 
@@ -416,8 +420,7 @@ router.route('/round/:round_id')
     });
   });
 
-//End of Round Schema
-
+//___________________________________________________________________QUESTION__
 //beginning of QuestionSchema
 
 router.route('/question')
@@ -487,7 +490,7 @@ router.route('/question/:question_id')
     });
   });
 
-//End of QuestionSchema
+//_____________________________________________________________________________
 
 app.use('/api', router);
 

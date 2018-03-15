@@ -21,15 +21,14 @@ class App extends Component {
       trivia_id: "",
     };
   }
-
   updateTriviaId(newTriviaId){
     this.setState({
-      trivia_id:newTriviaId,
+      trivia_id: newTriviaId,
     });
   }
+
   render() {
     return (
-
       <div>
         <Router>
           <Security
