@@ -59,6 +59,57 @@
 
 
 
+//
+// displayRound5() {
+//   if (this.state.quizInfo.name) {
+//   return (<div>
+//     {this.state.quizInfo.rounds[4].category}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].question1}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].answer1}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].question2}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].answer2}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].question3}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].answer3}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].question4}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].answer4}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].question5}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].answer5}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].question6}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].answer6}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].question7}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].answer7}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].question8}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].answer8}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].question9}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].answer9}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].question10}
+//     <br/>
+//     {this.state.quizInfo.rounds[4].questions[0].answer10}
+//     <br/>
+//   </div>)
+// } else{
+//   return(<div/>)
+// }
+// }
 
 ````````// Multi-process to utilize all CPU cores.
 // if (cluster.isMaster) {
