@@ -53,6 +53,9 @@
 ### 3/15/18
 - successfully wrote PUT route on the back end in TextRoundInput
 - successfully linked front-end route to back end (textroundinput)
+- created all textroundinput files for each round and have them sending info to backend
+- added quizreview file (redirected here after you submit info on last round page)
+- started fetching info from backend to be displayed on quizreview page
 
 
 
