@@ -3,7 +3,7 @@ import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
 import { Container, Header, Accordion } from 'semantic-ui-react';
 
-export default withAuth(class QuizReview extends Component {
+export default withAuth(class PresentRound1 extends Component {
   constructor( props ) {
     super( props );
     this.state = {
@@ -60,38 +60,20 @@ export default withAuth(class QuizReview extends Component {
           {quizInfo.rounds[round].category}
           {questionsAndAnswers}
           </div>)
-  }
+      }
       //within these divs is where we make changes to display/style/etc. for everything else
-  handleSubmit(event) {
-    this.props.auth._history.push("/presentround1")
-  }
 
   render() {
-    // let roundsToRender = <p>Loading Rounds</p>;
-    // let questionsToRender = <p>Loading Questions</p>;
-    // if (this.state.quizInfo.name) {
-    //   roundsToRender = <div> {this.state.quizInfo.rounds.map((rounds) => <p>{rounds.category}</p> )} </div>
-    //   questionsToRender = <div> {this.state.quizInfo.rounds.map((rounds) => <p>{rounds.questions.map((questions)=> <p>{questions.question1}</p>)}</p> )} </div>
-    // };
     if (this.state.quizInfo.name) {
       return(
         <form onSubmit = {this.handleSubmit}>
           <div>
+          Presentation Round 1!
           {this.state.quizInfo.name}
           <br/>
           {this.state.quizInfo.date}
           <br/>
           {this.displayRound(0)}
-          <br/>
-          {this.displayRound(1)}
-          <br/>
-          {this.displayRound(2)}
-          <br/>
-          {this.displayRound(3)}
-          <br/>
-          {this.displayRound(4)}
-          <br/>
-          <input type="submit" value="Present Round 1!" />
           </div>
         </form>
       )} else {
