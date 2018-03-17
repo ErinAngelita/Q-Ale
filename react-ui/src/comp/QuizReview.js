@@ -47,22 +47,21 @@ export default withAuth(class QuizReview extends Component {
   displayRound(round) {
       let quizInfo = this.state.quizInfo
       let questionsAndAnswers = []
-      console.log(this.state.quizInfo);
       for (let i = 1; i <= 10; i++){
         questionsAndAnswers.push((<div>
-          //within the divs are where we will make changes to all the question and answer display/style/etc.
-          {quizInfo.rounds[round].questions[0]["question"+i]}
-          {quizInfo.rounds[round].questions[0]["answer"+i]}
+          Question {i}: {quizInfo.rounds[round].questions[0]["question"+i]}
+          <br/>
+          Answer {i}: {quizInfo.rounds[round].questions[0]["answer"+i]}
           </div>))
       }
-
+      //within the divs are where we will make changes to all the question and answer display/style/etc.
         return(
           <div>
-          //within these divs is where we make changes to display/style/etc. for everything else
           {quizInfo.rounds[round].category}
           {questionsAndAnswers}
           </div>)
       }
+      //within these divs is where we make changes to display/style/etc. for everything else
 
 
   render() {
@@ -79,7 +78,16 @@ export default withAuth(class QuizReview extends Component {
       <br/>
       {this.state.quizInfo.date}
       <br/>
+      {this.displayRound(0)}
+      <br/>
       {this.displayRound(1)}
+      <br/>
+      {this.displayRound(2)}
+      <br/>
+      {this.displayRound(3)}
+      <br/>
+      {this.displayRound(4)}
+      <br/>
       </div>
     )
   } else {
