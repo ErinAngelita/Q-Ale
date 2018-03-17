@@ -57,9 +57,11 @@ export default withAuth(class CreateQuiz extends Component {
         <label> Quizname:
           <input id="quizname" type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
+        <br/>
         <label> Date:
           <input id="date" type="date" />
         </label>
+        <br/>
         <input type="submit" value="Create Quiz!" />
       </form>
       </div>
