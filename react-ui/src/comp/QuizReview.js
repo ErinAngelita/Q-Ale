@@ -24,6 +24,8 @@ export default withAuth(class QuizReview extends Component {
   // }
 
   populateQuiz = async() => {
+    // 5aaab363f37825434e391a21 hard coded trivia_id for testing, local to Kelsey's Macbook
+    //needs to be + this.props.trivia_id if not hardcoded
     const response = await fetch('/api/quizreview/5aaab363f37825434e391a21');
     const body = await response.json();
     return body;
@@ -66,7 +68,7 @@ export default withAuth(class QuizReview extends Component {
       //within these divs is where we make changes to display/style/etc. for everything else
   handleSubmit(event) {
     event.preventDefault();
-    this.props.auth._history.push("/presentround1")
+    this.props.auth._history.push("/presentation")
   }
 
   render() {
@@ -94,7 +96,7 @@ export default withAuth(class QuizReview extends Component {
           <br/>
           {this.displayRound(4)}
           <br/>
-          <input type="submit" value="Present Round 1!" />
+          <input type="submit" value="Present Quiz!" />
           </div>
         </form>
       )} else {
