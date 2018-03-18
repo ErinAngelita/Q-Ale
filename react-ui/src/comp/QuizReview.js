@@ -15,6 +15,8 @@ export default withAuth(class QuizReview extends Component {
     };
     this.checkAuthentication = checkAuthentication.bind( this );
     this.displayRound = this.displayRound.bind(this);
+    this.handleSubmit = this.handleSubmit.bind( this );
+
   }
   // handleClick(e, titleProps) => {
   //   const {index} = titleProps
@@ -63,6 +65,7 @@ export default withAuth(class QuizReview extends Component {
   }
       //within these divs is where we make changes to display/style/etc. for everything else
   handleSubmit(event) {
+    event.preventDefault();
     this.props.auth._history.push("/presentround1")
   }
 

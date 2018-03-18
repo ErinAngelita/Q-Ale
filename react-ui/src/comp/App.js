@@ -72,7 +72,7 @@ class App extends Component {
                 render={() => <QuizReview trivia_id={this.state.trivia_id} /> } />
               <SecureRoute
                 path="/presentround1"
-                render={() => <QuizReview trivia_id={this.state.trivia_id} /> } />
+                render={() => <PresentRound1 trivia_id={this.state.trivia_id} /> } />
             </Container>
           </Security>
         </Router>
