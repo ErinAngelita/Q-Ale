@@ -15,6 +15,8 @@ export default withAuth(class QuizReview extends Component {
     };
     this.checkAuthentication = checkAuthentication.bind( this );
     this.displayRound = this.displayRound.bind(this);
+    this.handleSubmit = this.handleSubmit.bind( this );
+
   }
   // handleClick(e, titleProps) => {
   //   const {index} = titleProps
@@ -22,6 +24,8 @@ export default withAuth(class QuizReview extends Component {
   // }
 
   populateQuiz = async() => {
+    // 5aaab363f37825434e391a21 hard coded trivia_id for testing, local to Kelsey's Macbook
+    //needs to be + this.props.trivia_id if not hardcoded
     const response = await fetch('/api/quizreview/5aaab363f37825434e391a21');
     const body = await response.json();
     return body;
@@ -47,23 +51,25 @@ export default withAuth(class QuizReview extends Component {
   displayRound(round) {
       let quizInfo = this.state.quizInfo
       let questionsAndAnswers = []
-      console.log(this.state.quizInfo);
       for (let i = 1; i <= 10; i++){
         questionsAndAnswers.push((<div>
-          //within the divs are where we will make changes to all the question and answer display/style/etc.
-          {quizInfo.rounds[round].questions[0]["question"+i]}
-          {quizInfo.rounds[round].questions[0]["answer"+i]}
+          Question {i}: {quizInfo.rounds[round].questions[0]["question"+i]}
+          <br/>
+          Answer {i}: {quizInfo.rounds[round].questions[0]["answer"+i]}
           </div>))
       }
-
+      //within the divs are where we will make changes to all the question and answer display/style/etc.
         return(
           <div>
-          //within these divs is where we make changes to display/style/etc. for everything else
           {quizInfo.rounds[round].category}
           {questionsAndAnswers}
           </div>)
-      }
-
+  }
+      //within these divs is where we make changes to display/style/etc. for everything else
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.auth._history.push("/presentation")
+  }
 
   render() {
     // let roundsToRender = <p>Loading Rounds</p>;
@@ -73,17 +79,28 @@ export default withAuth(class QuizReview extends Component {
     //   questionsToRender = <div> {this.state.quizInfo.rounds.map((rounds) => <p>{rounds.questions.map((questions)=> <p>{questions.question1}</p>)}</p> )} </div>
     // };
     if (this.state.quizInfo.name) {
-    return(
-      <div>
-      {this.state.quizInfo.name}
-      <br/>
-      {this.state.quizInfo.date}
-      <br/>
-      {this.displayRound(1)}
-      </div>
-    )
-  } else {
-    return (<div>Loading</div>)
-  }
-  }
-})
+      return(
+        <form onSubmit = {this.handleSubmit}>
+          <div>
+          {this.state.quizInfo.name}
+          <br/>
+          {this.state.quizInfo.date}
+          <br/>
+          {this.displayRound(0)}
+          <br/>
+          {this.displayRound(1)}
+          <br/>
+          {this.displayRound(2)}
+          <br/>
+          {this.displayRound(3)}
+          <br/>
+          {this.displayRound(4)}
+          <br/>
+          <input type="submit" value="Present Quiz!" />
+          </div>
+        </form>
+      )} else {
+        return (<div>Loading...</div>)
+      }
+    }
+  })

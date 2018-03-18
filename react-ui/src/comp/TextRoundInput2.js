@@ -69,35 +69,35 @@ export default withAuth(class TextRoundInput2 extends Component {
             <input id="roundcategory" type="text" value={this.state.value} />
           </label>
           <ul>
-            <input id="question1" type="text" value={this.state.value} />
-            <input id="answer1" type="text" value={this.state.value} />
-            <br/>
-            <input id="question2" type="text" value={this.state.value} />
-            <input id="answer2" type="text" value={this.state.value} />
-            <br/>
-            <input id="question3" type="text" value={this.state.value} />
-            <input id="answer3" type="text" value={this.state.value} />
-            <br/>
-            <input id="question4" type="text" value={this.state.value} />
-            <input id="answer4" type="text" value={this.state.value} />
-            <br/>
-            <input id="question5" type="text" value={this.state.value} />
-            <input id="answer5" type="text" value={this.state.value} />
-            <br/>
-            <input id="question6" type="text" value={this.state.value} />
-            <input id="answer6" type="text" value={this.state.value} />
-            <br/>
-            <input id="question7" type="text" value={this.state.value} />
-            <input id="answer7" type="text" value={this.state.value} />
-            <br/>
-            <input id="question8" type="text" value={this.state.value} />
-            <input id="answer8" type="text" value={this.state.value} />
-            <br/>
-            <input id="question9" type="text" value={this.state.value} />
-            <input id="answer9" type="text" value={this.state.value} />
-            <br/>
-            <input id="question10" type="text" value={this.state.value} />
-            <input id="answer10" type="text" value={this.state.value} />
+          Question 1:<input id="question1" type="text" value={this.state.value} />
+          Answer 1:<input id="answer1" type="text" value={this.state.value} />
+          <br/>
+          Question 2:<input id="question2" type="text" value={this.state.value} />
+          Answer 2:<input id="answer2" type="text" value={this.state.value} />
+          <br/>
+          Question 3:<input id="question3" type="text" value={this.state.value} />
+          Answer 3:<input id="answer3" type="text" value={this.state.value} />
+          <br/>
+          Question 4:<input id="question4" type="text" value={this.state.value} />
+          Answer 4:<input id="answer4" type="text" value={this.state.value} />
+          <br/>
+          Question 5:<input id="question5" type="text" value={this.state.value} />
+          Answer 5:<input id="answer5" type="text" value={this.state.value} />
+          <br/>
+          Question 6:<input id="question6" type="text" value={this.state.value} />
+          Answer 6:<input id="answer6" type="text" value={this.state.value} />
+          <br/>
+          Question 7:<input id="question7" type="text" value={this.state.value} />
+          Answer 7:<input id="answer7" type="text" value={this.state.value} />
+          <br/>
+          Question 8:<input id="question8" type="text" value={this.state.value} />
+          Answer 8:<input id="answer8" type="text" value={this.state.value} />
+          <br/>
+          Question 9:<input id="question9" type="text" value={this.state.value} />
+          Answer 9:<input id="answer9" type="text" value={this.state.value} />
+          <br/>
+          Question 10:<input id="question10" type="text" value={this.state.value} />
+          Answer 10:<input id="answer10" type="text" value={this.state.value} />
           </ul>
           <input type="submit" value="Create Round!" />
         </form>
