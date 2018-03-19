@@ -21,12 +21,14 @@ export default withAuth(class CreateQuiz extends Component {
       this.checkAuthentication();
   }
 
-  passToApp(mereow) {
-    this.props.updateTriviaId(mereow)
+  passToApp(triviaToApp) {
+    this.props.updateTriviaId(triviaToApp)
   }
 
   handleChange( event ) {
-    this.setState( {text: event.target.value} );
+    this.setState( {
+      text: event.target.value
+    } );
   }
   handleSubmit( event ) {
     event.preventDefault();

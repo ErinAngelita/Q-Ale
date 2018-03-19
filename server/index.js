@@ -139,6 +139,20 @@ router.route('/quizreview/:trivia_id')
       res.json(userId);
     });
   });
+//_________________________________________________________________MY_QUIZZES__
+//
+
+router.route('/myquizzes/:tokenSub')
+
+  .get((req, res) => {
+    console.log(res);
+    UserSchema.userId.find({tokenSub:req.params.tokenSub}).populate({path: 'trivias'}).exec((err, userId) => {
+      if (err)
+        res.send(err);
+      res.json(userId);
+    });
+  });
+
 
 //_______________________________________________________________________USER__
 // Routes for UserSchema

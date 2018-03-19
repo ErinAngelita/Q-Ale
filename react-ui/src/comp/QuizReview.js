@@ -16,7 +16,6 @@ export default withAuth(class QuizReview extends Component {
     this.checkAuthentication = checkAuthentication.bind( this );
     this.displayRound = this.displayRound.bind(this);
     this.handleSubmit = this.handleSubmit.bind( this );
-
   }
   // handleClick(e, titleProps) => {
   //   const {index} = titleProps
@@ -26,7 +25,7 @@ export default withAuth(class QuizReview extends Component {
   populateQuiz = async() => {
     // 5aaab363f37825434e391a21 hard coded trivia_id for testing, local to Kelsey's Macbook
     //needs to be + this.props.trivia_id if not hardcoded
-    const response = await fetch('/api/quizreview/5aaf312d48ccbe0004631dea');
+    const response = await fetch('/api/quizreview/5aaab363f37825434e391a21');
     const body = await response.json();
     return body;
   }

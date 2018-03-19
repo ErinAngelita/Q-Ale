@@ -6,7 +6,7 @@ import config from './auth/.samples.config.js';
 import Navbar from './Navbar.jsx';
 import LoginPage from './auth/LoginPage.js';
 import Home from './Home';
-import Profile from './Profile.jsx';
+import MyQuizzes from './MyQuizzes.jsx';
 import CreateQuiz from './CreateQuiz';
 import TextRoundInput1 from './TextRoundInput1.js';
 import TextRoundInput2 from './TextRoundInput2.js';
@@ -26,6 +26,7 @@ class App extends Component {
     super();
     this.state = {
       trivia_id: "",
+      userId_id: "",
     };
   }
   updateTriviaId(newTriviaId){
@@ -50,29 +51,52 @@ class App extends Component {
               <Route path="/login" component={LoginPage} />
               <SecureRoute
                 path="/createquiz"
-                render={() => <CreateQuiz trivia_id={this.state.trivia_id} updateTriviaId={this.updateTriviaId.bind(this)} /> } />
-              <SecureRoute path="/profile" component={Profile} />
+                render={() => <CreateQuiz
+                  trivia_id={this.state.trivia_id}
+                  updateTriviaId={this.updateTriviaId.bind(this)} />
+                } />
+              <SecureRoute
+                path="/myquizzes"
+                render={() => <MyQuizzes
+                  trivia_id={this.state.trivia_id}
+                  updateTriviaId={this.updateTriviaId.bind(this)}
+                  userId_id={this.state.userId_id} />
+                } />
               <SecureRoute
                 path="/textroundinput1"
-                render={() => <TextRoundInput1 trivia_id={this.state.trivia_id} /> } />
+                render={() => <TextRoundInput1
+                  trivia_id={this.state.trivia_id} />
+                } />
               <SecureRoute
                 path="/textroundinput2"
-                render={() => <TextRoundInput2 trivia_id={this.state.trivia_id} /> } />
+                render={() => <TextRoundInput2
+                  trivia_id={this.state.trivia_id} />
+                } />
               <SecureRoute
                 path="/textroundinput3"
-                render={() => <TextRoundInput3 trivia_id={this.state.trivia_id} /> } />
+                render={() => <TextRoundInput3
+                  trivia_id={this.state.trivia_id} />
+                } />
               <SecureRoute
                 path="/textroundinput4"
-                render={() => <TextRoundInput4 trivia_id={this.state.trivia_id} /> } />
+                render={() => <TextRoundInput4
+                  trivia_id={this.state.trivia_id} />
+                } />
               <SecureRoute
                 path="/textroundinput5"
-                render={() => <TextRoundInput5 trivia_id={this.state.trivia_id} /> } />
+                render={() => <TextRoundInput5
+                  trivia_id={this.state.trivia_id} />
+                } />
               <SecureRoute
                 path="/quizreview"
-                render={() => <QuizReview trivia_id={this.state.trivia_id} /> } />
+                render={() => <QuizReview
+                  trivia_id={this.state.trivia_id} />
+                } />
               <SecureRoute
                 path="/presentation"
-                render={() => <Presentation trivia_id={this.state.trivia_id} /> } />
+                render={() => <Presentation
+                  trivia_id={this.state.trivia_id} />
+                } />
             </Container>
           </Security>
         </Router>
