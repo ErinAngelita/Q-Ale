@@ -22,8 +22,8 @@ export default withAuth(class Presentation extends Component {
 
   populateQuiz = async() => {
     // 5aaab363f37825434e391a21 hard coded trivia_id for testing, local to Kelsey's Macbook
-    //needs to be + this.props.trivia_id if not hardcoded
-    const response = await fetch('/api/quizreview/5aaab363f37825434e391a21');
+    //needs to be 5aaab363f37825434e391a21if not hardcoded
+    const response = await fetch('/api/quizreview/' + this.props.trivia_id);
     const body = await response.json();
     return body;
   }

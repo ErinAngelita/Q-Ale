@@ -23,10 +23,14 @@ export default withAuth(class QuizReview extends Component {
   // }
 
   populateQuiz = async() => {
+    console.log("inside populate");
+    console.log(this.props.trivia_id);
     // 5aaab363f37825434e391a21 hard coded trivia_id for testing, local to Kelsey's Macbook
-    //needs to be + this.props.trivia_id if not hardcoded
-    const response = await fetch('/api/quizreview/5aaab363f37825434e391a21');
+    //needs to be +  5aaab363f37825434e391a21if not hardcoded
+    const response = await fetch('/api/quizreview/' + this.props.trivia_id);
     const body = await response.json();
+    console.log(response, body);
+    console.log("after await");
     return body;
   }
 
@@ -36,11 +40,15 @@ export default withAuth(class QuizReview extends Component {
       .then(this.populateQuiz()
       .then((res) => {
         var quizData = res;
+        console.log("component did mount populate");
+        console.log(quizData);
          self.setState({
            quizInfo: quizData,
          });
       })
     )
+    console.log("now in quizreview");
+    console.log(this.props);
   }
 
   async componentDidUpdate() {

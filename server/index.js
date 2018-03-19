@@ -128,6 +128,7 @@ router.route('/textroundinput/:trivia_id')
 router.route('/quizreview/:trivia_id')
 
   .get((req, res) => {
+    console.log(req.params.trivia_id);
     TriviaSchema.trivia.findById(req.params.trivia_id).populate({
       path: 'rounds',
       populate: {
@@ -136,6 +137,7 @@ router.route('/quizreview/:trivia_id')
     }).exec((err, userId) => {
       if (err)
         res.send(err);
+        console.log(userId);
       res.json(userId);
     });
   });

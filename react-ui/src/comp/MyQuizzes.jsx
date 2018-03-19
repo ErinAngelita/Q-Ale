@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
-import { Header, Icon, Table } from 'semantic-ui-react';
+import { Header, Icon, Table, Button } from 'semantic-ui-react';
 
 import { checkAuthentication } from './helpers';
 
@@ -15,6 +15,7 @@ export default withAuth(class MyQuizzes extends Component {
     }
     this.checkAuthentication = checkAuthentication.bind(this);
     this.displayTrivias = this.displayTrivias.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   populateTrivias = async() => {
@@ -25,35 +26,43 @@ export default withAuth(class MyQuizzes extends Component {
 
 
   async componentDidMount() {
-    let self = this;
     await this.checkAuthentication()
-    console.log(this.state);
-    console.log("after authentication");
     await this.populateTrivias()
     .then((res) => {
       var triviasData = res;
-      console.log("after res");
-      console.log(triviasData);
       this.setState({
         triviasInfo: triviasData,
         ready: true,
       })
-      console.log(this.state);
     })
+    console.log(this.props);
   }
 
   async componentDidUpdate() {
     this.checkAuthentication();
+    if (this.props.trivia_id !== "") {
+      this.props.auth._history.push("/quizreview")
+    }
+    console.log(this.props.trivia_id)
+  }
+
+  handleClick(event) {
+    event.preventDefault()
+    this.props.updateTriviaId(event.target.value)
+    //console.log(event.target.value)
   }
 
   displayTrivias(trivia) {
       let triviasInfo = this.state.triviasInfo
       let listOfTrivias = []
+      console.log(triviasInfo);
       for (let i = 0; i < triviasInfo.length; i++){
-        listOfTrivias.push((<div>
+        listOfTrivias.push((<div >
           Quiz: {triviasInfo[i].trivias[0].name}
           <br/>
           Date: {triviasInfo[i].trivias[0].date}
+          <br/>
+          <input type="submit" value={this.state.triviasInfo[i].trivias[0]._id} onClick={this.handleClick}/>
           </div>))
       }
       //within the divs are where we will make changes to all the question and answer display/style/etc.
