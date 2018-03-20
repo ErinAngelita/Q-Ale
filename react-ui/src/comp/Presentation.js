@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
 import { Container, Header, Accordion } from 'semantic-ui-react';
+import '../css/Presentation.css';
 
 export default withAuth(class Presentation extends Component {
   constructor( props ) {
@@ -123,7 +124,7 @@ export default withAuth(class Presentation extends Component {
   render() {
     if (this.state.quizInfo.name) {
       return(
-      <form onSubmit = {this.handleSubmit}>
+      <form id="presentationForm" onSubmit = {this.handleSubmit}>
         <div>
           {this.state.quizInfo.name}
           <br/>

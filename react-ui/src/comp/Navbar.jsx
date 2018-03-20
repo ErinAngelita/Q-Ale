@@ -2,6 +2,7 @@ import { withAuth } from '@okta/okta-react';
 import React, { Component } from 'react';
 import { Container, Icon, Image, Menu } from 'semantic-ui-react';
 import { checkAuthentication } from './helpers';
+import '../css/NavBar.css';
 
 export default withAuth(class Navbar extends Component {
   constructor(props) {
@@ -25,9 +26,8 @@ export default withAuth(class Navbar extends Component {
     return (
       <div>
         <Menu fixed="top" inverted>
-          <Container>
-            <Menu.Item as="a" header href="/">
-              <Image size="mini" src="/react.svg" />
+          <Container id="navMenu">
+            <Menu.Item id="QALEBUTTON" as="a" header href="/">
               Q&Ale
             </Menu.Item>
             {this.state.authenticated === true && <Menu.Item id="createquiz-button" as="a" href="/createquiz" ><Icon name="mail outline" /> Create Quiz </Menu.Item>}
@@ -36,8 +36,6 @@ export default withAuth(class Navbar extends Component {
             {this.state.authenticated === false && <Menu.Item as="a" onClick={this.props.auth.login}> Login </Menu.Item>}
           </Container>
         </Menu>
-        <div>
-        </div>
       </div>
     );
   }

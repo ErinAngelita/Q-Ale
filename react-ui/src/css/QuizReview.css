@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "Trocchi";
+  src: url("./Images/Trocchi.otf")
+}
+
+#ReviewForm {
+  font-family: "Trocchi";
+  text-align: center;
+}
+
+#quizname2 {
+  font-size: 60px;
+}
+
+#date2 {
+  font-size: 30px;
+}
+
+#roundCat {
+  font-size: 20px;
+}
+
+#submitButton {
+  font-family: "Trocchi";
+}
+
+#loading {
+  text-align: center;
+  font-family: "Trocchi";
+}

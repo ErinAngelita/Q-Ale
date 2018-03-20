@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
+import '../css/TextRoundInput2.css';
 
 export default withAuth(class TextRoundInput2 extends Component {
   constructor( props ) {
@@ -64,42 +65,42 @@ export default withAuth(class TextRoundInput2 extends Component {
         <p>
           Round 2
         </p>
-        <form onSubmit = {this.handleSubmit}>
-          <label> Round Category:
+        <form id="RoundCat" onSubmit = {this.handleSubmit}>
+          <label > Round Category:
             <input id="roundcategory" type="text" value={this.state.value} />
           </label>
-          <ul>
-          Question 1:<input id="question1" type="text" value={this.state.value} />
-          Answer 1:<input id="answer1" type="text" value={this.state.value} />
-          <br/>
-          Question 2:<input id="question2" type="text" value={this.state.value} />
-          Answer 2:<input id="answer2" type="text" value={this.state.value} />
-          <br/>
-          Question 3:<input id="question3" type="text" value={this.state.value} />
-          Answer 3:<input id="answer3" type="text" value={this.state.value} />
-          <br/>
-          Question 4:<input id="question4" type="text" value={this.state.value} />
-          Answer 4:<input id="answer4" type="text" value={this.state.value} />
-          <br/>
-          Question 5:<input id="question5" type="text" value={this.state.value} />
-          Answer 5:<input id="answer5" type="text" value={this.state.value} />
-          <br/>
-          Question 6:<input id="question6" type="text" value={this.state.value} />
-          Answer 6:<input id="answer6" type="text" value={this.state.value} />
-          <br/>
-          Question 7:<input id="question7" type="text" value={this.state.value} />
-          Answer 7:<input id="answer7" type="text" value={this.state.value} />
-          <br/>
-          Question 8:<input id="question8" type="text" value={this.state.value} />
-          Answer 8:<input id="answer8" type="text" value={this.state.value} />
-          <br/>
-          Question 9:<input id="question9" type="text" value={this.state.value} />
-          Answer 9:<input id="answer9" type="text" value={this.state.value} />
-          <br/>
-          Question 10:<input id="question10" type="text" value={this.state.value} />
-          Answer 10:<input id="answer10" type="text" value={this.state.value} />
+          <ul id="QuestionList">
+            Question 1:<input className="question" id="question1" type="text" value={this.state.value} />
+            Answer 1:<input className="answer" id="answer1" type="text" value={this.state.value} />
+            <br/>
+            Question 2:<input className="question" id="question2" type="text" value={this.state.value} />
+            Answer 2:<input className="answer" id="answer2" type="text" value={this.state.value} />
+            <br/>
+            Question 3:<input className="question" id="question3" type="text" value={this.state.value} />
+            Answer 3:<input className="answer" id="answer3" type="text" value={this.state.value} />
+            <br/>
+            Question 4:<input className="question" id="question4" type="text" value={this.state.value} />
+            Answer 4:<input className="answer" id="answer4" type="text" value={this.state.value} />
+            <br/>
+            Question 5:<input className="question" id="question5" type="text" value={this.state.value} />
+            Answer 5:<input className="answer" id="answer5" type="text" value={this.state.value} />
+            <br/>
+            Question 6:<input className="question" id="question6" type="text" value={this.state.value} />
+            Answer 6:<input className="answer" id="answer6" type="text" value={this.state.value} />
+            <br/>
+            Question 7:<input className="question" id="question7" type="text" value={this.state.value} />
+            Answer 7:<input className="answer" id="answer7" type="text" value={this.state.value} />
+            <br/>
+            Question 8:<input className="question" id="question8" type="text" value={this.state.value} />
+            Answer 8:<input className="answer" id="answer8" type="text" value={this.state.value} />
+            <br/>
+            Question 9:<input className="question" id="question9" type="text" value={this.state.value} />
+            Answer 9:<input className="answer" id="answer9" type="text" value={this.state.value} />
+            <br/>
+            Question 10:<input className="question" id="question10" type="text" value={this.state.value} />
+            Answer 10:<input className="answer" id="answer10" type="text" value={this.state.value} />
           </ul>
-          <input type="submit" value="Create Round!" />
+          <input id="RoundSubmit" type="submit" value="Create Round!" />
         </form>
       </div>
     );

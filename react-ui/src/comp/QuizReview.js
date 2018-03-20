@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
 import { Container, Header, Accordion } from 'semantic-ui-react';
+import '../css/QuizReview.css';
 
 export default withAuth(class QuizReview extends Component {
   constructor( props ) {
@@ -51,7 +52,7 @@ export default withAuth(class QuizReview extends Component {
       }
         return(
           <div>
-          {quizInfo.rounds[round].category}
+            <div id="roundCat">{quizInfo.rounds[round].category}</div>
           {questionsAndAnswers}
           </div>)
   }
@@ -64,11 +65,11 @@ export default withAuth(class QuizReview extends Component {
   render() {
     if (this.state.quizInfo.name) {
       return(
-        <form onSubmit = {this.handleSubmit}>
+        <form id="ReviewForm" onSubmit = {this.handleSubmit}>
           <div>
-          {this.state.quizInfo.name}
+            <div id="quizname2">{this.state.quizInfo.name}</div>
           <br/>
-          {this.state.quizInfo.date}
+            <div id="date2">{this.state.quizInfo.date}</div>
           <br/>
           {this.displayRound(0)}
           <br/>
@@ -80,11 +81,11 @@ export default withAuth(class QuizReview extends Component {
           <br/>
           {this.displayRound(4)}
           <br/>
-          <input type="submit" value="Present Quiz!" />
+          <input id="submitButton" type="submit" value="Present Quiz!" />
           </div>
         </form>
       )} else {
-        return (<div>Loading...</div>)
+        return (<div id="loading">Loading...</div>)
       }
     }
   })

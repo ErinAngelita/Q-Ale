@@ -1,6 +1,5 @@
 import React from 'react';
 import OktaSignIn from '@okta/okta-signin-widget';
-import '../../css/LoginPage.css';
 import config from './.samples.config.js';
 
 export default class LoginPage extends React.Component {

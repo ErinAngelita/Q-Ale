@@ -2,6 +2,8 @@ import { withAuth } from '@okta/okta-react';
 import React, { Component } from 'react';
 import { Button, Header } from 'semantic-ui-react';
 import { checkAuthentication } from './helpers';
+import '../css/Home.css';
+import '../css/Images/QALELOGO.png';
 
 export default withAuth(class Home extends Component {
   constructor(props) {
@@ -24,10 +26,10 @@ export default withAuth(class Home extends Component {
       <div>
         {this.state.authenticated !== null &&
         <div>
-          <Header as="h1">Q&Ale</Header>
+          <img id="logoImg" src={require("../css/Images/QALELOGO.png")} />
           {this.state.authenticated &&
             <div>
-              <p>Welcome back, {this.state.userinfo.name}!</p>
+              <p id= "welcomeWords">Welcome back, {this.state.userinfo.name}!</p>
             </div>
           }
           {!this.state.authenticated &&

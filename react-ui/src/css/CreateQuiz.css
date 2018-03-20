@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "Trocchi";
+  src: url("./Images/Trocchi.otf")
+}
+
+#createForm {
+  text-align: center;
+  justify-content: center;
+}
+
+#quiznameLabel {
+  font-family: "Trocchi";
+}
+
+#quizname {
+  font-family: "Trocchi";
+}
+
+#dateLabel {
+  font-family: "Trocchi";
+}
+
+#date {
+  font-family: "Trocchi";
+}
+
+#submitButton {
+  font-family: "Trocchi";
+}

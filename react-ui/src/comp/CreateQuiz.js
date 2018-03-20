@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
+import '../css/CreateQuiz.css';
 
 export default withAuth(class CreateQuiz extends Component {
   constructor( props ) {
@@ -55,16 +56,16 @@ export default withAuth(class CreateQuiz extends Component {
   render() {
     return(
       <div>
-      <form onSubmit = {this.handleSubmit}>
-        <label> Quizname:
+      <form id="createForm" onSubmit = {this.handleSubmit}>
+        <label id="quiznameLabel" > Quiz Name:
           <input id="quizname" type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
         <br/>
-        <label> Date:
+        <label id="dateLabel"> Date:
           <input id="date" type="date" />
         </label>
         <br/>
-        <input type="submit" value="Create Quiz!" />
+        <input id="submitButton" type="submit" value="Create Quiz!" />
       </form>
       </div>
     );

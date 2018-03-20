@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "Trocchi";
+  src: url("./Images/Trocchi.otf")
+}
+
+#presentationForm {
+  text-align: center;
+  font-family: "Trocchi";
+}

@@ -1,0 +1,41 @@
+@font-face {
+  font-family: "Trocchi";
+  src: url("./Images/Trocchi.otf")
+}
+
+p {
+  text-align: center;
+  font-family: "Trocchi";
+  font-size: 20px;
+}
+
+#RoundCat {
+  text-align: center;
+  font-family: "Trocchi";
+}
+
+label {
+  text-align: center;
+  font-family: "Trocchi";
+}
+
+#roundcategory {
+  font-family: "Trocchi";
+}
+
+#QuestionList {
+  text-align: center;
+  font-family: "Trocchi";
+}
+
+.question {
+  font-family: "Trocchi";
+}
+
+.answer {
+  font-family: "Trocchi";
+}
+
+#RoundSubmit {
+  font-family: "Trocchi";
+}
