@@ -44,7 +44,7 @@ export default withAuth(class MyQuizzes extends Component {
 
   handleClick(event) {
     event.preventDefault()
-    this.props.updateTriviaId(event.target.value)
+    this.props.updateTriviaId(event.target.name)
   }
 
   displayTrivias(trivia) {
@@ -56,7 +56,7 @@ export default withAuth(class MyQuizzes extends Component {
           <br/>
           Date: {triviasInfo[i].trivias[0].date}
           <br/>
-          <input type="submit" value={this.state.triviasInfo[i].trivias[0]._id} onClick={this.handleClick}/>
+          <input type="submit" name={this.state.triviasInfo[i].trivias[0]._id} value="Review This Quiz" onClick={this.handleClick}/>
           </div>))
       }
         return(
