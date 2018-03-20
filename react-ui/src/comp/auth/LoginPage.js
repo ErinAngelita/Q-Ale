@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
+import React from 'react';
 import OktaSignIn from '@okta/okta-signin-widget';
-import Backbone from 'backbone';
 import '../../css/LoginPage.css';
 import config from './.samples.config.js';
 

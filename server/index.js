@@ -33,10 +33,6 @@ router.use((res, req, next) => {
   next();
 });
 
-router.get('/', (req, res) => {
-  res.json({message: "What's up? Welcome to QuizPig!~"});
-});
-
 //________________________________________________________________CREATE_QUIZ__
 
 router.route('/createquiz')
@@ -128,7 +124,6 @@ router.route('/textroundinput/:trivia_id')
 router.route('/quizreview/:trivia_id')
 
   .get((req, res) => {
-    console.log(req.params.trivia_id);
     TriviaSchema.trivia.findById(req.params.trivia_id).populate({
       path: 'rounds',
       populate: {
@@ -137,7 +132,6 @@ router.route('/quizreview/:trivia_id')
     }).exec((err, userId) => {
       if (err)
         res.send(err);
-        console.log(userId);
       res.json(userId);
     });
   });
@@ -147,17 +141,17 @@ router.route('/quizreview/:trivia_id')
 router.route('/myquizzes/:tokenSub')
 
   .get((req, res) => {
-    console.log(res);
-    UserSchema.userId.find({tokenSub:req.params.tokenSub}).populate({path: 'trivias'}).exec((err, userId) => {
+    UserSchema.userId.find({tokenSub:req.params.tokenSub}).populate({
+      path: 'trivias'
+    }).exec((err, userId) => {
       if (err)
         res.send(err);
       res.json(userId);
     });
   });
 
-
+//_____________________________________________MAINTENANCE ROUTES FOR BACKEND__
 //_______________________________________________________________________USER__
-// Routes for UserSchema
 
 router.route('/userId')
 
@@ -243,23 +237,6 @@ router.route('/userId/:userId_id')
     });
   })
 
-  .post((req, res) => {
-    UserSchema.userId.findById(req.params.userId_id, (err, userId) => {
-      if(err)
-        res.send(err);
-      const trivia = new TriviaSchema.trivia({
-        name: "do you work yet?"
-      });
-      trivia.save();
-      userId.trivias.push(trivia);
-      userId.save(err => {
-        if(err)
-          res.send(err);
-        res.json({message: "userId trivias updated!"});
-      });
-    });
-  })
-
   .put((req, res) => {
     UserSchema.userId.findById(req.params.userId_id, (err, userId) => {
       if (err)
@@ -286,7 +263,6 @@ router.route('/userId/:userId_id')
   });
 
 //_____________________________________________________________________TRIVIA__
-//Routes for TriviaSchema
 
 router.route('/trivia')
   .post((req, res) => {
@@ -294,7 +270,6 @@ router.route('/trivia')
     trivia.name = req.body.name;
     trivia.date = req.body.date;
     trivia.rounds = req.body.rounds;
-    console.log(req.body.name);
     trivia.save(err => {
       console.log("saved");
       if (err)
@@ -302,6 +277,7 @@ router.route('/trivia')
       res.json({message: "Quiz created!!"});
     });
   })
+
   .get((req, res) => {
     TriviaSchema.trivia.find((err, trivia) => {
       if (err)
@@ -309,6 +285,7 @@ router.route('/trivia')
       res.json(trivia);
     });
   })
+
   .delete(({
     params
   }, res) => {
@@ -319,9 +296,8 @@ router.route('/trivia')
     });
   });
 
-
-
 router.route('/trivia/:trivia_id')
+
   .get((req, res) => {
     TriviaSchema.trivia.findById(req.params.trivia_id, (err, trivia) => {
       if (err)
@@ -329,6 +305,7 @@ router.route('/trivia/:trivia_id')
       res.json(trivia);
     });
   })
+
   .put((req, res) => {
     TriviaSchema.trivia.findById(req.params.trivia_id, (err, trivia) => {
       if (err)
@@ -343,6 +320,7 @@ router.route('/trivia/:trivia_id')
       });
     });
   })
+
   .delete(({
     params
   }, res) => {
@@ -356,7 +334,6 @@ router.route('/trivia/:trivia_id')
   });
 
 //______________________________________________________________________ROUND__
-//Begining of RoundSchema
 
 router.route('/round')
 
@@ -399,27 +376,6 @@ router.route('/round')
 
 router.route('/round/:round_id')
 
-  .post((req, res) => {
-    RoundSchema.round.findById(req.params.round_id, (err, round) => {
-      if(err)
-        res.send(err);
-      const question = new QuestionSchema.question({
-        question: "hey",
-        answer: "you",
-        is_Img: false,
-        img_Url: "there"
-      });
-      question.save();
-      round.questions.push(question);
-      round.save(err => {
-        if(err)
-          res.send(err);
-        res.json({message: "round questions updated!"});
-      });
-    });
-
-  })
-
   .get((req, res) => {
     RoundSchema.round.findById(req.params.round_id).populate('questions').exec((err, round) => {
       if (err)
@@ -454,17 +410,13 @@ router.route('/round/:round_id')
   });
 
 //___________________________________________________________________QUESTION__
-//beginning of QuestionSchema
 
 router.route('/question')
 
   .post((req, res) => {
-    console.log(req.body);
     const question = new QuestionSchema.question();
     question.question = req.body.question;
     question.answer = req.body.answer;
-    question.is_Img = req.body.is_Img;
-    question.img_Url = req.body.img_Url;
     question.save(err => {
       console.log("saved");
       if (err)
@@ -472,6 +424,7 @@ router.route('/question')
       res.json({message: "Question created!!"});
     });
   })
+
   .get((req, res) => {
     QuestionSchema.question.find((err, question) => {
       if (err)
@@ -491,6 +444,7 @@ router.route('/question')
   });
 
 router.route('/question/:question_id')
+
   .get((req, res) => {
     QuestionSchema.question.findById(req.params.question_id, (err, question) => {
       if (err)
@@ -498,14 +452,13 @@ router.route('/question/:question_id')
       res.json(question);
     });
   })
+
   .put((req, res) => {
     QuestionSchema.question.findById(req.params.question_id, (err, question) => {
       if (err)
         res.send(err);
       question.question = req.body.question;
       question.answer = req.body.answer;
-      question.is_Img = req.body.is_Img;
-      question.img_Url = req.body.img_Url;
       question.save(err => {
         if (err)
           res.send(err);
@@ -513,6 +466,7 @@ router.route('/question/:question_id')
       });
     });
   })
+
   .delete(({params}, res) => {
     QuestionSchema.question.remove({
       _id: params.question_id

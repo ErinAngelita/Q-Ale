@@ -17,38 +17,22 @@ export default withAuth(class QuizReview extends Component {
     this.displayRound = this.displayRound.bind(this);
     this.handleSubmit = this.handleSubmit.bind( this );
   }
-  // handleClick(e, titleProps) => {
-  //   const {index} = titleProps
-  //
-  // }
 
   populateQuiz = async() => {
-    console.log("inside populate");
-    console.log(this.props.trivia_id);
-    // 5aaab363f37825434e391a21 hard coded trivia_id for testing, local to Kelsey's Macbook
-    //needs to be +  5aaab363f37825434e391a21if not hardcoded
     const response = await fetch('/api/quizreview/' + this.props.trivia_id);
     const body = await response.json();
-    console.log(response, body);
-    console.log("after await");
     return body;
   }
 
   async componentDidMount() {
-    let self = this;
-      this.checkAuthentication()
-      .then(this.populateQuiz()
+      await this.checkAuthentication()
+      await this.populateQuiz()
       .then((res) => {
         var quizData = res;
-        console.log("component did mount populate");
-        console.log(quizData);
-         self.setState({
+         this.setState({
            quizInfo: quizData,
          });
       })
-    )
-    console.log("now in quizreview");
-    console.log(this.props);
   }
 
   async componentDidUpdate() {
@@ -65,26 +49,19 @@ export default withAuth(class QuizReview extends Component {
           Answer {i}: {quizInfo.rounds[round].questions[0]["answer"+i]}
           </div>))
       }
-      //within the divs are where we will make changes to all the question and answer display/style/etc.
         return(
           <div>
           {quizInfo.rounds[round].category}
           {questionsAndAnswers}
           </div>)
   }
-      //within these divs is where we make changes to display/style/etc. for everything else
+
   handleSubmit(event) {
     event.preventDefault();
     this.props.auth._history.push("/presentation")
   }
 
   render() {
-    // let roundsToRender = <p>Loading Rounds</p>;
-    // let questionsToRender = <p>Loading Questions</p>;
-    // if (this.state.quizInfo.name) {
-    //   roundsToRender = <div> {this.state.quizInfo.rounds.map((rounds) => <p>{rounds.category}</p> )} </div>
-    //   questionsToRender = <div> {this.state.quizInfo.rounds.map((rounds) => <p>{rounds.questions.map((questions)=> <p>{questions.question1}</p>)}</p> )} </div>
-    // };
     if (this.state.quizInfo.name) {
       return(
         <form onSubmit = {this.handleSubmit}>

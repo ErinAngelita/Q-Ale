@@ -21,8 +21,6 @@ export default withAuth(class Presentation extends Component {
   }
 
   populateQuiz = async() => {
-    // 5aaab363f37825434e391a21 hard coded trivia_id for testing, local to Kelsey's Macbook
-    //needs to be 5aaab363f37825434e391a21if not hardcoded
     const response = await fetch('/api/quizreview/' + this.props.trivia_id);
     const body = await response.json();
     return body;
@@ -45,7 +43,6 @@ export default withAuth(class Presentation extends Component {
     this.checkAuthentication();
   }
 
-
   handleSubmit(event) {
     event.preventDefault()
     this.setState({
@@ -67,10 +64,12 @@ export default withAuth(class Presentation extends Component {
 
   displayQuestions(roundNum) {
     let quizInfo = this.state.quizInfo
-    let questions1Present = ""
     let showQuestion = "";
     let questionNum = this.state.questionNum
     switch(questionNum) {
+      default:
+          showQuestion = "Loading questions..."
+          break;
       case 0:
           showQuestion = "Question 1: " + quizInfo.rounds[roundNum].questions[0]["question1"]
           break;

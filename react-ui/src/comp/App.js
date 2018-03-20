@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Security, SecureRoute, ImplicitCallback, render } from '@okta/okta-react';
+import { Security, SecureRoute, ImplicitCallback } from '@okta/okta-react';
 import { Container } from 'semantic-ui-react';
 import config from './auth/.samples.config.js';
 import Navbar from './Navbar.jsx';
@@ -15,7 +15,6 @@ import TextRoundInput4 from './TextRoundInput4.js';
 import TextRoundInput5 from './TextRoundInput5.js';
 import QuizReview from './QuizReview.js';
 import Presentation from './Presentation.js';
-
 
 function customAuthHandler ({ history }) {
   history.push('/login');
