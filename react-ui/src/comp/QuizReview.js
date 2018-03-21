@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
-import { Container, Header, Accordion } from 'semantic-ui-react';
+import { Container, Header, Icon, Accordion } from 'semantic-ui-react';
 import '../css/QuizReview.css';
 import '../css/Images/QALELOGO.png';
+import QAleLogo from '../css/Images/QAleLogoButton.png';
 
 export default withAuth(class QuizReview extends Component {
   constructor( props ) {
@@ -14,10 +15,12 @@ export default withAuth(class QuizReview extends Component {
       name: " ",
       date: " ",
       quizInfo: {},
+      activeIndex: -1,
     };
     this.checkAuthentication = checkAuthentication.bind( this );
     this.displayRound = this.displayRound.bind(this);
     this.handleSubmit = this.handleSubmit.bind( this );
+    this.handleClick = this.handleClick.bind(this);
   }
 
   populateQuiz = async() => {
@@ -44,6 +47,7 @@ export default withAuth(class QuizReview extends Component {
   displayRound(round) {
       let quizInfo = this.state.quizInfo
       let questionsAndAnswers = []
+      const {activeIndex} = this.state
       for (let i = 1; i <= 10; i++){
         questionsAndAnswers.push((<div>
           Question {i}: {quizInfo.rounds[round].questions[0]["question"+i]}
@@ -53,14 +57,28 @@ export default withAuth(class QuizReview extends Component {
       }
         return(
           <div>
-          <div id="roundCat2">{quizInfo.rounds[round].category}</div>
-          {questionsAndAnswers}
+          <Accordion>
+            <Accordion.Title id="roundCat2" active={activeIndex === round} index={round} onClick={this.handleClick}>
+                <div> <Icon as="img" id="beerGlassIcon" src={QAleLogo} /><Icon name="dropdown" />  Round Category: {quizInfo.rounds[round].category}</div>
+            </Accordion.Title>
+            <Accordion.Content active={activeIndex === round}>
+              {questionsAndAnswers}
+            </Accordion.Content>
+          </Accordion>
           </div>)
+
   }
 
   handleSubmit(event) {
     event.preventDefault();
     this.props.auth._history.push("/presentation")
+  }
+
+  handleClick(event, titleProps) {
+    const {index} = titleProps
+    const {activeIndex} = this.state
+    const newIndex = activeIndex === index ? -1 : index
+    this.setState({activeIndex: newIndex})
   }
 
   render() {

@@ -3,13 +3,24 @@
   src: url("./Images/Trocchi.otf")
 }
 
+@font-face {
+  font-family: "AbrilFatface";
+  src: url("./Images/AbrilFatface.otf")
+}
+
+#beerGlassIcon {
+  height:30px;
+}
+
 #ReviewForm {
   font-family: "Trocchi";
   text-align: center;
 }
 
 #quizName2 {
+  font-family: "AbrilFatface";
   font-size: 60px;
+  color: #5780e6;
 }
 
 #date2 {
@@ -17,6 +28,7 @@
 }
 
 #roundCat2 {
+  font-family: "Trocchi";
   font-size: 30px;
 }
 
