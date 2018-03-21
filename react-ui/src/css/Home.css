@@ -14,7 +14,7 @@
   text-align: center;
 }
 
-#submitButton {
+#login-button {
   font-family: "Trocchi";
   color: #edbc62;
   font-size: 14px;
@@ -24,7 +24,7 @@
   outline: 0;
 }
 
-#submitButton:hover {
+#login-button:hover {
   font-family: "Trocchi";
   color: #edbc62;
   font-size: 14px;
