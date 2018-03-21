@@ -3,7 +3,28 @@
   src: url("./Images/Trocchi.otf")
 }
 
+#roundCat3 {
+  font-size: 40px;
+}
+
+#presentQuestion {
+  font-size: 80px;
+}
+
+#presentAnswers {
+  font-size: 25px;
+}
+
 #presentationForm {
+  text-align: center;
+  font-family: "Trocchi";
+}
+
+#submitButton {
+  font-family: "Trocchi";
+}
+
+#loading {
   text-align: center;
   font-family: "Trocchi";
 }

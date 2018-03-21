@@ -3,7 +3,7 @@
   src: url("./Images/Trocchi.otf")
 }
 
-#navMenu{
+#navMenu {
   color: #5780e6;
   text-align: center;
   font-family: "Trocchi";
@@ -12,23 +12,27 @@
   background-color: #edbc62;
   height: 50px;
 }
-#profile-button{
+
+#profile-button {
   color: #5780e6;
   padding-left: 10px;
   padding-right: 10px;
 }
-#logout-button{
+
+#logout-button {
   color: #5780e6;
   padding-left: 10px;
   padding-right: 10px;
   text-decoration: underline;
 }
-#createquiz-button{
+
+#createquiz-button {
   color: #5780e6;
   padding-left: 10px;
   padding-right: 10px;
 }
-#QALEBUTTON{
+
+#qaleButton {
   color: #5780e6;
   padding-left: 10px;
   padding-right: 10px;

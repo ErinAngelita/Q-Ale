@@ -3,6 +3,7 @@ import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
 import { Container, Header, Accordion } from 'semantic-ui-react';
 import '../css/Presentation.css';
+import QAleLogo from '../css/Images/QAleLogoButton.png';
 
 export default withAuth(class Presentation extends Component {
   constructor( props ) {
@@ -52,7 +53,7 @@ export default withAuth(class Presentation extends Component {
     if (this.state.roundNum === 4 && this.state.questionNum === 11) {
       this.setState({
         questionNum: 0,
-        roundNum: 0
+        roundNum: 0,
       })
       this.props.auth._history.push("/myquizzes")
     } else if (this.state.questionNum === 11) {
@@ -66,6 +67,7 @@ export default withAuth(class Presentation extends Component {
   displayQuestions(roundNum) {
     let quizInfo = this.state.quizInfo
     let showQuestion = "";
+    let showAnswers = "";
     let questionNum = this.state.questionNum
     switch(questionNum) {
       default:
@@ -102,7 +104,7 @@ export default withAuth(class Presentation extends Component {
           showQuestion = "Question 10: " + quizInfo.rounds[roundNum].questions[0]["question10"]
           break;
       case 10:
-          showQuestion = "Intermission"
+          showQuestion = "Turn in your answer sheets!"
           break;
       case 11:
           let answers = []
@@ -111,13 +113,14 @@ export default withAuth(class Presentation extends Component {
               Answer {i}: {quizInfo.rounds[roundNum].questions[0]["answer"+i]}
               </div>))
             }
-          showQuestion = answers
+          showAnswers = answers
       }
     return(
       <div>
-        {quizInfo.rounds[roundNum].category}
+        <div id="roundCat3">{quizInfo.rounds[roundNum].category}</div>
         <br/>
-        {showQuestion}
+        <div id="presentQuestion">{showQuestion}</div>
+        <div id="presentAnswers">{showAnswers}</div>
       </div>);
   }
 
@@ -126,18 +129,21 @@ export default withAuth(class Presentation extends Component {
       return(
       <form id="presentationForm" onSubmit = {this.handleSubmit}>
         <div>
-          {this.state.quizInfo.name}
-          <br/>
-          {this.state.quizInfo.date}
-          <br/>
           {this.displayQuestions(this.state.roundNum)}
           <br/>
-          <input type="submit" value="Next" />
+          <input id="submitButton" type="submit" value="Next" />
         </div>
       </form>
       )
     } else {
-      return (<div>Loading...</div>)
+      return (<div id="loading">Loading...</div>)
     }
   }
 })
+
+
+// Created QAleLogoButton.png in Images folder and imported it here
+// tried many things to make QAleLogo display/work as button.  Can get it to display, but not funtion.
+// Tried the following, rather than <input> tag with many variations.
+// 134  <img id="hikebutton" src={QAleLogo} type="submit"/>
+// Also tried the <input> tag with many variations.

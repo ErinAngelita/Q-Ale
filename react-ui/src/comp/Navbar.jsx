@@ -27,7 +27,7 @@ export default withAuth(class Navbar extends Component {
       <div>
         <Menu fixed="top" inverted>
           <Container id="navMenu">
-            <Menu.Item id="QALEBUTTON" as="a" header href="/">
+            <Menu.Item id="qaleButton" as="a" header href="/">
               Q&Ale
             </Menu.Item>
             {this.state.authenticated === true && <Menu.Item id="createquiz-button" as="a" href="/createquiz" ><Icon name="mail outline" /> Create Quiz </Menu.Item>}

@@ -33,7 +33,7 @@ export default withAuth(class TextRoundInput4 extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        category: document.getElementById("roundcategory").value,
+        category: document.getElementById("roundCategory").value,
         question1: document.getElementById("question1").value,
         answer1: document.getElementById("answer1").value,
         question2: document.getElementById("question2").value,
@@ -65,11 +65,11 @@ export default withAuth(class TextRoundInput4 extends Component {
         <p>
           Round 4
         </p>
-        <form id="RoundCat" onSubmit = {this.handleSubmit}>
+        <form id="roundCat" onSubmit = {this.handleSubmit}>
           <label > Round Category:
-            <input id="roundcategory" type="text" value={this.state.value} />
+            <input id="roundCategory" type="text" value={this.state.value} />
           </label>
-          <ul id="QuestionList">
+          <ul id="questionList">
             Question 1:<input className="question" id="question1" type="text" value={this.state.value} />
             Answer 1:<input className="answer" id="answer1" type="text" value={this.state.value} />
             <br/>
@@ -100,7 +100,7 @@ export default withAuth(class TextRoundInput4 extends Component {
             Question 10:<input className="question" id="question10" type="text" value={this.state.value} />
             Answer 10:<input className="answer" id="answer10" type="text" value={this.state.value} />
           </ul>
-          <input id="RoundSubmit" type="submit" value="Create Round!" />
+          <input id="roundSubmit" type="submit" value="Create Round!" />
         </form>
       </div>
     );

@@ -9,7 +9,7 @@ p {
   font-size: 20px;
 }
 
-#RoundCat {
+#roundCat {
   text-align: center;
   font-family: "Trocchi";
 }
@@ -19,11 +19,11 @@ label {
   font-family: "Trocchi";
 }
 
-#roundcategory {
+#roundCategory {
   font-family: "Trocchi";
 }
 
-#QuestionList {
+#questionList {
   text-align: center;
   font-family: "Trocchi";
 }
@@ -36,6 +36,6 @@ label {
   font-family: "Trocchi";
 }
 
-#RoundSubmit {
+#roundSubmit {
   font-family: "Trocchi";
 }

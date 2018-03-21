@@ -62,7 +62,7 @@
 - finished displaying all quiz info on QuizReview
 - created presentation format that goes through all questions, intermissions, and answer reviews
 - created My Quizzes page that displays all quizzes for a particular user and links that specific quiz to a button - takes user back to quizreview for that specific quizzes
-- NavBar CSS is mostly completed; requires minor tweaks.
+- started css styling for home, navbar, presentation, quizreview, and all textroundinput files
 
 
 ----

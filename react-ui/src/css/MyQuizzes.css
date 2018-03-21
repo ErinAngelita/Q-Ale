@@ -3,39 +3,21 @@
   src: url("./Images/Trocchi.otf")
 }
 
-p {
-  text-align: center;
-  font-family: "Trocchi";
-  font-size: 20px;
-}
-
-#roundCat {
+#myQuizzesHeader {
   text-align: center;
   font-family: "Trocchi";
 }
 
-label {
+#myQuizzes {
   text-align: center;
   font-family: "Trocchi";
 }
 
-#roundCategory {
+#submitButton {
   font-family: "Trocchi";
 }
 
-#questionList {
+#loading {
   text-align: center;
-  font-family: "Trocchi";
-}
-
-.question {
-  font-family: "Trocchi";
-}
-
-.answer {
-  font-family: "Trocchi";
-}
-
-#roundSubmit {
   font-family: "Trocchi";
 }
