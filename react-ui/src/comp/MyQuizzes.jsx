@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import { Header, Icon } from 'semantic-ui-react';
 import { checkAuthentication } from './helpers';
+import '../css/Images/QALELOGO.png';
 
 export default withAuth(class MyQuizzes extends Component {
   constructor(props) {

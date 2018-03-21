@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
 import '../css/TextRoundInput4.css';
+import '../css/Images/QALELOGO.png';
 
 export default withAuth(class TextRoundInput4 extends Component {
   constructor( props ) {

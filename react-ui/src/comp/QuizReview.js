@@ -3,6 +3,7 @@ import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
 import { Container, Header, Accordion } from 'semantic-ui-react';
 import '../css/QuizReview.css';
+import '../css/Images/QALELOGO.png';
 
 export default withAuth(class QuizReview extends Component {
   constructor( props ) {
