@@ -26,4 +26,21 @@
 
 #submitButton {
   font-family: "Trocchi";
+  color: #edbc62;
+  font-size: 14px;
+  background-color: #5780e6;
+  border-radius: 100%;
+  padding: 20px;
+  outline: 0;
+}
+
+#submitButton:hover {
+  font-family: "Trocchi";
+  color: #edbc62;
+  font-size: 14px;
+  background-color: #5780e6;
+  border-radius: 100%;
+  padding: 20px;
+  outline: 0;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }

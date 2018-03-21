@@ -101,7 +101,7 @@ export default withAuth(class TextRoundInput2 extends Component {
             Question 10:<input className="question" id="question10" type="text" value={this.state.value} />
             Answer 10:<input className="answer" id="answer10" type="text" value={this.state.value} />
           </ul>
-          <input id="roundSubmit" type="submit" value="Create Round!" />
+          <input id="submitButton" type="submit" value="Create Round!" />
         </form>
         <div>
           <img id="logoImg1" src={require("../css/Images/QALELOGO.png")} />
