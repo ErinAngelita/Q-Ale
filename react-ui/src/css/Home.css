@@ -3,10 +3,19 @@
   src: url("./Images/Trocchi.otf")
 }
 
+#loginPage {
+  font-family: "Trocchi";
+  text-align: center;
+}
+
 #welcomeWords {
   font-family: "Trocchi";
   font-size: 20px;
   text-align: center;
+}
+
+#login-button {
+  font-family: "Trocchi";
 }
 
 body {

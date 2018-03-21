@@ -19,6 +19,13 @@
   padding-right: 10px;
 }
 
+#loginButton {
+  color: #5780e6;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: underline;
+}
+
 #logout-button {
   color: #5780e6;
   padding-left: 10px;
