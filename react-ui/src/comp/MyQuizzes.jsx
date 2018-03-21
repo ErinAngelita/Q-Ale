@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import { Header, Icon } from 'semantic-ui-react';
 import { checkAuthentication } from './helpers';
+import '../css/MyQuizzes.css';
 import '../css/Images/QALELOGO.png';
 
 export default withAuth(class MyQuizzes extends Component {
@@ -52,12 +53,12 @@ export default withAuth(class MyQuizzes extends Component {
       let triviasInfo = this.state.triviasInfo
       let listOfTrivias = []
       for (let i = 0; i < triviasInfo.length; i++){
-        listOfTrivias.push((<div >
+        listOfTrivias.push((<div id="myQuizzes">
           Quiz: {triviasInfo[i].trivias[0].name}
           <br/>
           Date: {triviasInfo[i].trivias[0].date}
           <br/>
-          <input type="submit" name={this.state.triviasInfo[i].trivias[0]._id} value="Review This Quiz" onClick={this.handleClick}/>
+          <input id="submitButton" type="submit" name={this.state.triviasInfo[i].trivias[0]._id} value="Review This Quiz" onClick={this.handleClick}/>
           </div>))
       }
         return(
@@ -70,11 +71,14 @@ export default withAuth(class MyQuizzes extends Component {
     if (this.state.triviasInfo) {
       return (
         <div>
-          <Header as="h1"><Icon name="drivers license outline" /> My Quizzes </Header>
+          <Header id="myQuizzesHeader" as="h1"> My Quizzes </Header>
             {this.displayTrivias(this.state.trivia)}
+          <div>
+            <img id="logoImg1" src={require("../css/Images/QALELOGO.png")} />
+          </div>
         </div>
     )} else {
-        return (<div>Loading Quizzes...</div>)
+        return (<div id="loading">Loading Quizzes...</div>)
     }
   }
 });

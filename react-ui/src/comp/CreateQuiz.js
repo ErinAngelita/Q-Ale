@@ -43,7 +43,7 @@ export default withAuth(class CreateQuiz extends Component {
       },
       body: JSON.stringify({
         tokenSub: this.state.userinfo.sub,
-        name: document.getElementById( "quizname" ).value,
+        name: document.getElementById( "quizName" ).value,
         date: document.getElementById( "date" ).value
       })
     })
@@ -57,15 +57,17 @@ export default withAuth(class CreateQuiz extends Component {
   render() {
     return(
       <div>
+      <img id="logoImg" src={require("../css/Images/QALELOGO.png")} />
       <form id="createForm" onSubmit = {this.handleSubmit}>
-        <label id="quiznameLabel" > Quiz Name:
-          <input id="quizname" type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <br/>
-        <label id="dateLabel"> Date:
-          <input id="date" type="date" />
-        </label>
-        <br/>
+        <ul>
+          <label id="quizNameLabel" > Quiz Name:
+            <input id="quizName" type="text" value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <br/>
+          <label id="dateLabel"> Date:
+            <input id="date" type="date" />
+          </label>
+        </ul>
         <input id="submitButton" type="submit" value="Create Quiz!" />
       </form>
       </div>

@@ -53,7 +53,7 @@ export default withAuth(class QuizReview extends Component {
       }
         return(
           <div>
-            <div id="roundCat">{quizInfo.rounds[round].category}</div>
+          <div id="roundCat2">{quizInfo.rounds[round].category}</div>
           {questionsAndAnswers}
           </div>)
   }
@@ -68,9 +68,9 @@ export default withAuth(class QuizReview extends Component {
       return(
         <form id="ReviewForm" onSubmit = {this.handleSubmit}>
           <div>
-            <div id="quizname2">{this.state.quizInfo.name}</div>
+          <div id="quizName2">{this.state.quizInfo.name}</div>
           <br/>
-            <div id="date2">{this.state.quizInfo.date}</div>
+          <div id="date2">{this.state.quizInfo.date}</div>
           <br/>
           {this.displayRound(0)}
           <br/>
@@ -83,6 +83,9 @@ export default withAuth(class QuizReview extends Component {
           {this.displayRound(4)}
           <br/>
           <input id="submitButton" type="submit" value="Present Quiz!" />
+          <div>
+            <img id="logoImg3" src={require("../css/Images/QALELOGO.png")} />
+          </div>
           </div>
         </form>
       )} else {

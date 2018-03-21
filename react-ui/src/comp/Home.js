@@ -25,7 +25,7 @@ export default withAuth(class Home extends Component {
     return (
       <div>
         {this.state.authenticated !== null &&
-        <div>
+        <div id="loginPage">
           <img id="logoImg" src={require("../css/Images/QALELOGO.png")} />
           {this.state.authenticated &&
             <div>
