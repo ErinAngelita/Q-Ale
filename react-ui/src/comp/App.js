@@ -44,7 +44,7 @@ class App extends Component {
             redirect_uri={config.oidc.redirectUri}
             onAuthRequired={customAuthHandler}>
             <Navbar />
-            <Container text style={{ marginTop: '7em'}}>
+            <Container text style={{marginTop: '7em'}}>
               <Route path="/" exact component={Home} />
               <Route path="/implicit/callback" component={ImplicitCallback} />
               <Route path="/login" component={LoginPage} />
