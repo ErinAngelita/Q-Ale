@@ -4,6 +4,7 @@ import { checkAuthentication } from './helpers';
 import { Container, Header, Accordion } from 'semantic-ui-react';
 import '../css/Presentation.css';
 import QAleLogo from '../css/Images/QAleLogoButton.png';
+import '../css/Images/QALELOGO.png';
 
 export default withAuth(class Presentation extends Component {
   constructor( props ) {
@@ -132,6 +133,9 @@ export default withAuth(class Presentation extends Component {
           {this.displayQuestions(this.state.roundNum)}
           <br/>
           <input id="submitButton" type="submit" value="Next" />
+          <div>
+            <img id="logoImg2" src={require("../css/Images/QALELOGO.png")} />
+          </div>
         </div>
       </form>
       )

@@ -3,6 +3,7 @@ import { withAuth } from '@okta/okta-react';
 import { Header, Icon } from 'semantic-ui-react';
 import { checkAuthentication } from './helpers';
 import '../css/MyQuizzes.css';
+import '../css/Images/QALELOGO.png';
 
 export default withAuth(class MyQuizzes extends Component {
   constructor(props) {
@@ -72,6 +73,9 @@ export default withAuth(class MyQuizzes extends Component {
         <div>
           <Header id="myQuizzesHeader" as="h1"> My Quizzes </Header>
             {this.displayTrivias(this.state.trivia)}
+          <div>
+            <img id="logoImg1" src={require("../css/Images/QALELOGO.png")} />
+          </div>
         </div>
     )} else {
         return (<div id="loading">Loading Quizzes...</div>)

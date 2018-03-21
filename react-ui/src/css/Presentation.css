@@ -28,3 +28,11 @@
   text-align: center;
   font-family: "Trocchi";
 }
+
+#logoImg2 {
+  height: 100px;
+  display: block;
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -3,6 +3,7 @@ import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
 import { Container, Header, Accordion } from 'semantic-ui-react';
 import '../css/QuizReview.css';
+import '../css/Images/QALELOGO.png';
 
 export default withAuth(class QuizReview extends Component {
   constructor( props ) {
@@ -82,6 +83,9 @@ export default withAuth(class QuizReview extends Component {
           {this.displayRound(4)}
           <br/>
           <input id="submitButton" type="submit" value="Present Quiz!" />
+          <div>
+            <img id="logoImg3" src={require("../css/Images/QALELOGO.png")} />
+          </div>
           </div>
         </form>
       )} else {
