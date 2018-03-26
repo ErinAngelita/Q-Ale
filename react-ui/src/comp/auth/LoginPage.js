@@ -20,9 +20,8 @@ export default class LoginPage extends React.Component {
 
   componentDidMount() {
     this.signIn.renderEl(
-      {el: '#sign-in-widget'},
-      () => {
-      },
+      { el: '#sign-in-widget' },
+      () => {},
       (err) => {
         throw err;
       }

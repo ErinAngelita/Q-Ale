@@ -28,6 +28,7 @@ class App extends Component {
       userId_id: "",
     };
   }
+  
   updateTriviaId(newTriviaId){
     this.setState({
       trivia_id: newTriviaId,

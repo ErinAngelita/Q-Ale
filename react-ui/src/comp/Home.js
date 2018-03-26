@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Button, Header } from 'semantic-ui-react';
 import { checkAuthentication } from './helpers';
 import '../css/Home.css';
-import '../css/Images/QALELOGO.png';
+import logo from '../css/Images/QALELOGO.png';
 
 export default withAuth(class Home extends Component {
   constructor(props) {
@@ -21,12 +21,11 @@ export default withAuth(class Home extends Component {
   }
 
   render() {
-
     return (
       <div>
         {this.state.authenticated !== null &&
         <div id="loginPage">
-          <img id="logoImg" src={require("../css/Images/QALELOGO.png")} />
+          <img id="logoImg" src={logo} />
           {this.state.authenticated &&
             <div>
               <p id= "welcomeWords">Welcome back, {this.state.userinfo.name}!</p>

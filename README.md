@@ -1,5 +1,29 @@
-
 # Trivia Night - Q&Ale
+
+## Welcome to Q&Ale!  A trivia host's companion app to generate and present trivia quizzes.
+
+#### If you're new to Q&Ale...
+- Clone the repo
+- npm install on both the front and back ends.
+  - front-end is in the react-ui folder
+  - back-end is in the server folder
+- in order to run the app on your local server, you will need to simultaneously run 2 terminals (one for both the front and back ends)
+  - on the front-end: cd into the react-ui folder and run
+    `npm start`
+  - on the back-end: make sure to be in triviaNight and run
+    `npm run devstart`
+- app is served on `localhost:5000`
+
+#### Q&Ale's Features...
+- Our app utilizes Okta user authentication (you will need to sign up for your own Okta account and link it with the page)
+  - In samples.config.js, you will need to input clientId and issuer from your own Okta accout
+- Users can login and create a trivia quiz
+  - Here, they will input the name and date of the quiz, then input all round categories and question/answer combos (handled on individual pages of app)
+- Users will then be directed to a quiz review page and can enter presentation mode from there.
+- Users can also go to the My Quizzes section and review all of the quizzes they have previously made (can review details and enter presentation mode from there as well).
+
+#### Known bugs...
+- When creating a quiz, if the user doesn't input the name of the quiz and all round categories, they won't be able to review the quiz
 
 ## Daily Workflow Logs
 ### 2/28/18
