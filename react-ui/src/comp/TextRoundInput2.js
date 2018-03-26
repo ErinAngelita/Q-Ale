@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
 import '../css/TextRoundInput2.css';
-import '../css/Images/QALELOGO.png';
+import logo from '../css/Images/QALELOGO.png';
 
 export default withAuth(class TextRoundInput2 extends Component {
   constructor( props ) {
@@ -17,11 +17,11 @@ export default withAuth(class TextRoundInput2 extends Component {
   }
 
   async componentDidMount() {
-      this.checkAuthentication();
+    this.checkAuthentication();
   }
 
   async componentDidUpdate() {
-      this.checkAuthentication();
+    this.checkAuthentication();
   }
 
   handleSubmit(event) {
@@ -104,7 +104,7 @@ export default withAuth(class TextRoundInput2 extends Component {
           <input id="submitButton" type="submit" value="Create Round!" />
         </form>
         <div>
-          <img id="logoImg1" src={require("../css/Images/QALELOGO.png")} />
+          <img id="logoImg1" src={logo} />
         </div>
       </div>
     );

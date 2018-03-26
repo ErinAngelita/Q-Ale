@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
 import '../css/CreateQuiz.css';
-import '../css/Images/QALELOGO.png';
+import logo from '../css/Images/QALELOGO.png';
 
 export default withAuth(class CreateQuiz extends Component {
   constructor( props ) {
@@ -16,11 +16,13 @@ export default withAuth(class CreateQuiz extends Component {
     this.handleSubmit = this.handleSubmit.bind( this );
     this.checkAuthentication = checkAuthentication.bind( this );
   }
+
   async componentDidMount() {
-      this.checkAuthentication();
+    this.checkAuthentication();
   }
+
   async componentDidUpdate() {
-      this.checkAuthentication();
+    this.checkAuthentication();
   }
 
   passToApp(triviaToApp) {
@@ -28,10 +30,11 @@ export default withAuth(class CreateQuiz extends Component {
   }
 
   handleChange( event ) {
-    this.setState( {
+    this.setState({
       text: event.target.value
-    } );
+    });
   }
+
   handleSubmit( event ) {
     event.preventDefault();
     fetch( '/api/createquiz', {
@@ -54,22 +57,23 @@ export default withAuth(class CreateQuiz extends Component {
     })
     this.props.auth._history.push("/textroundinput1")
   }
+
   render() {
     return(
       <div>
-      <img id="logoImg" src={require("../css/Images/QALELOGO.png")} />
-      <form id="createForm" onSubmit = {this.handleSubmit}>
-        <ul>
-          <label id="quizNameLabel" > Quiz Name:
-            <input id="quizName" type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <br/>
-          <label id="dateLabel"> Date:
-            <input id="date" type="date" />
-          </label>
-        </ul>
-        <input id="submitButton" type="submit" value="Create Quiz!" />
-      </form>
+        <img id="logoImg" src={logo} />
+        <form id="createForm" onSubmit = {this.handleSubmit}>
+          <ul>
+            <label id="quizNameLabel" > Quiz Name:
+              <input id="quizName" type="text" value={this.state.value} onChange={this.handleChange} />
+            </label>
+            <br/>
+            <label id="dateLabel"> Date:
+              <input id="date" type="date" />
+            </label>
+          </ul>
+          <input id="submitButton" type="submit" value="Create Quiz!" />
+        </form>
       </div>
     );
   }

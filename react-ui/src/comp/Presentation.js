@@ -4,7 +4,7 @@ import { checkAuthentication } from './helpers';
 import { Container, Header, Accordion } from 'semantic-ui-react';
 import '../css/Presentation.css';
 import QAleLogo from '../css/Images/QAleLogoButton.png';
-import '../css/Images/QALELOGO.png';
+import logo from '../css/Images/QALELOGO.png';
 
 export default withAuth(class Presentation extends Component {
   constructor( props ) {
@@ -115,13 +115,19 @@ export default withAuth(class Presentation extends Component {
               </div>))
             }
           showAnswers = answers
-      }
+    }
     return(
       <div>
-        <div id="roundCat3">{quizInfo.rounds[roundNum].category}</div>
+        <div id="roundCat3">
+          {quizInfo.rounds[roundNum].category}
+        </div>
         <br/>
-        <div id="presentQuestion">{showQuestion}</div>
-        <div id="presentAnswers">{showAnswers}</div>
+        <div id="presentQuestion">
+          {showQuestion}
+        </div>
+        <div id="presentAnswers">
+          {showAnswers}
+        </div>
       </div>);
   }
 
@@ -134,7 +140,7 @@ export default withAuth(class Presentation extends Component {
           <br/>
           <input id="submitButton" type="submit" value="Next" />
           <div>
-            <img id="logoImg2" src={require("../css/Images/QALELOGO.png")} />
+            <img id="logoImg2" src={logo} />
           </div>
         </div>
       </form>

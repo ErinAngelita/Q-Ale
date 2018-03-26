@@ -3,7 +3,7 @@ import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from './helpers';
 import { Container, Header, Icon, Accordion } from 'semantic-ui-react';
 import '../css/QuizReview.css';
-import '../css/Images/QALELOGO.png';
+import logo from '../css/Images/QALELOGO.png';
 import QAleLogo from '../css/Images/QAleLogoButton.png';
 
 export default withAuth(class QuizReview extends Component {
@@ -30,43 +30,49 @@ export default withAuth(class QuizReview extends Component {
   }
 
   async componentDidMount() {
-      await this.checkAuthentication()
-      await this.populateQuiz()
-      .then((res) => {
-        var quizData = res;
-         this.setState({
-           quizInfo: quizData,
-         });
-      })
+    await this.checkAuthentication()
+    await this.populateQuiz()
+    .then((res) => {
+      var quizData = res;
+       this.setState({
+         quizInfo: quizData,
+       });
+    })
   }
 
   async componentDidUpdate() {
-      this.checkAuthentication();
+    this.checkAuthentication();
   }
 
   displayRound(round) {
-      let quizInfo = this.state.quizInfo
-      let questionsAndAnswers = []
-      const {activeIndex} = this.state
-      for (let i = 1; i <= 10; i++){
-        questionsAndAnswers.push((<div>
+    let quizInfo = this.state.quizInfo
+    let questionsAndAnswers = []
+    const {activeIndex} = this.state
+    for (let i = 1; i <= 10; i++) {
+      questionsAndAnswers.push((
+        <div>
           Question {i}: {quizInfo.rounds[round].questions[0]["question"+i]}
           <br/>
           Answer {i}: {quizInfo.rounds[round].questions[0]["answer"+i]}
-          </div>))
-      }
-        return(
-          <div>
+        </div>
+      ))
+    }
+      return(
+        <div>
           <Accordion>
             <Accordion.Title id="roundCat2" active={activeIndex === round} index={round} onClick={this.handleClick}>
-                <div> <Icon as="img" id="beerGlassIcon" src={QAleLogo} /><Icon name="dropdown" />  Round Category: {quizInfo.rounds[round].category}</div>
+              <div>
+                <Icon as="img" id="beerGlassIcon" src={QAleLogo} />
+                <Icon name="dropdown" />
+                Round Category: {quizInfo.rounds[round].category}
+              </div>
             </Accordion.Title>
             <Accordion.Content active={activeIndex === round}>
               {questionsAndAnswers}
             </Accordion.Content>
           </Accordion>
-          </div>)
-
+        </div>
+      )
   }
 
   handleSubmit(event) {
@@ -86,28 +92,30 @@ export default withAuth(class QuizReview extends Component {
       return(
         <form id="ReviewForm" onSubmit = {this.handleSubmit}>
           <div>
-          <div id="quizName2">{this.state.quizInfo.name}</div>
-          <br/>
-          <div id="date2">{this.state.quizInfo.date}</div>
-          <br/>
-          {this.displayRound(0)}
-          <br/>
-          {this.displayRound(1)}
-          <br/>
-          {this.displayRound(2)}
-          <br/>
-          {this.displayRound(3)}
-          <br/>
-          {this.displayRound(4)}
-          <br/>
-          <input id="submitButton" type="submit" value="Present Quiz!" />
-          <div>
-            <img id="logoImg3" src={require("../css/Images/QALELOGO.png")} />
-          </div>
+            <div id="quizName2">{this.state.quizInfo.name}</div>
+            <br/>
+            <div id="date2">{this.state.quizInfo.date}</div>
+            <br/>
+            {this.displayRound(0)}
+            <br/>
+            {this.displayRound(1)}
+            <br/>
+            {this.displayRound(2)}
+            <br/>
+            {this.displayRound(3)}
+            <br/>
+            {this.displayRound(4)}
+            <br/>
+            <input id="submitButton" type="submit" value="Present Quiz!" />
+            <div>
+              <img id="logoImg3" src={logo} />
+            </div>
           </div>
         </form>
       )} else {
-        return (<div id="loading">Loading...</div>)
+        return (
+          <div id="loading">Loading...</div>
+        )
       }
     }
   })
